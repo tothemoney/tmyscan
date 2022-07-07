@@ -212,8 +212,9 @@ class MarketHistoryChart {
       cubicInterpolationMode: 'monotone',
       pointRadius: 0,
       backgroundColor: priceLineColor,
-      borderColor: "#6D00F3" // <-- Color line
-      // lineTension: 0
+      borderColor: "#6D00F3", // <-- Color line
+      lineTension: 0.5,
+      borderWidth: 1
     }
     if (dataConfig.market === undefined || dataConfig.market.indexOf('price') === -1) {
       this.price.hidden = true
@@ -229,8 +230,9 @@ class MarketHistoryChart {
       cubicInterpolationMode: 'monotone',
       pointRadius: 0,
       backgroundColor: mcapLineColor,
-      borderColor: "#6D00F3" // <-- Color line
-      // lineTension: 0
+      borderColor: "#6D00F3", // <-- Color line
+      lineTension: 0.5,
+      borderWidth: 1
     }
     if (dataConfig.market === undefined || dataConfig.market.indexOf('market_cap') === -1) {
       this.marketCap.hidden = true
@@ -248,8 +250,9 @@ class MarketHistoryChart {
       fill: false,
       pointRadius: 0,
       backgroundColor: getTxChartColor(),
-      borderColor: "#6D00F3" // <-- Color line
-      // lineTension: 0
+      borderColor: "#6D00F3", // <-- Color line
+      lineTension: 0.5,
+      borderWidth: 1
     }
 
     if (dataConfig.transactions === undefined || dataConfig.transactions.indexOf('transactions_per_day') === -1) {
