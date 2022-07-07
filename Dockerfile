@@ -25,7 +25,7 @@ ENV MIX_ENV="prod" \
 ## git clone -b build-1 https://github.com/artemstrelnik/blockscout.git
 RUN git clone https://github.com/artemstrelnik/blockscout-1.git
 
-WORKDIR /blockscout
+WORKDIR /blockscout-1
 
 ## Compile
 RUN mix local.hex --force && \ 
