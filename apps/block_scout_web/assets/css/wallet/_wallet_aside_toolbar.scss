@@ -1,0 +1,77 @@
+.asideToolbar-wrapper {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	z-index: 9999999;
+	padding-top: 150px;
+	left: -105px;
+	max-width: 100px;
+	height: 100%;
+}
+.asideToolbar {
+	position: sticky;
+	top: 30px;
+	width: 100%;
+	padding: 25px;
+	background: #F7F8FC;
+	border-radius: 10px;
+	.container {
+		display: inline-flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+	}
+	.asideToolbar__item {
+		display: block;
+		&:not(:last-child) {
+			margin-bottom: 30px;
+		}
+	}
+}
+.asideToolbar__item-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+	background: #FFFFFF;
+	box-shadow: 0px 4px 4px rgba(101, 35, 183, 0.19);
+	svg {
+		width: 18px;
+		height: 18px;
+		path {
+			stroke: #6D00F3;
+		}
+	}
+}
+.asideToolbar__item-text {
+	display: block;
+	text-align: center;
+	margin-top: 5px;
+	font-size: 10px;
+	color: #474C5F;
+}
+.asideToolbar__item-active {
+	.asideToolbar__item-icon {
+		background: #6D00F3;
+		svg {
+			path {
+				stroke: #fff;
+			}
+		}
+	}
+}
+.asideToolbar__item {
+	&:hover {
+		.asideToolbar__item-icon {
+			background: #6D00F3;
+			svg {
+				path {
+					stroke: #fff;
+				}
+			}
+		}
+	}
+}
