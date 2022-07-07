@@ -223,9 +223,11 @@
           <%= gettext("- We're indexing this chain right now. Some of the counts may be inaccurate.") %>
         </div>
       <% end %>
-      
+
       <%= render BlockScoutWeb.LayoutView, "_wallet_header.html", assigns %>
       <%= render BlockScoutWeb.LayoutView, "_wallet_aside_toolbar.html", assigns %>
+
+      <%= @inner_content %>
       
     </div>
     <%= if (
