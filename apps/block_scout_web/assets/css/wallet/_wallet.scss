@@ -517,3 +517,27 @@ input:not([type="submit"]) {
   margin-bottom: 26px;
   border-radius: 10px;
 }
+
+.btnEl {
+  display: block;
+  font: 400 12px/1em 'Inter', sans-serif;
+  padding: 14px 30px;
+  background: #6D00F3;
+  border-radius: 20px !important;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+}
+
+.clear-container {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.card-chain-blocks-fix {
+  background: #F7F8FC !important;
+  border-radius: 10px !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}

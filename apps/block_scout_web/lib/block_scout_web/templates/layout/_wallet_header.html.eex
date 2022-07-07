@@ -33,21 +33,32 @@
         </a>
         <nav class="MainNavbar">
             <ul class="d-flex justify-content-between">
-                <li class="dropdown-element">
-                    <a href="#">Компания</a>
-                    <ul>
-                        <li><a href="">Контакты</a></li>
-                        <li><a href="">Система</a></li>
-                        <li><a href="">Scanner</a></li>
+                        <li class="dropdown-element">
+                            <a href="#">Blocks</a>
+                            <ul>
+                                <li><a href="">Blocks</a></li>
+                                <li><a href="">Uncles</a></li>
+                                <li><a href="">Forked Blocks (Reorgs)</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-element">
+                            <a href="#">Transactions</a>
+                            <ul>
+                                <li><a href="">Validated</a></li>
+                                <li><a href="">Pending</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="">Accounts</a></li>
+                        <li><a href="">Tokens</a></li>
+                        <li class="dropdown-element">
+                            <a href="#">APIs</a>
+                            <ul>
+                                <li><a href="">GraphQL</a></li>
+                                <li><a href="">RPC</a></li>
+                                <li><a href="">Eth RPC</a></li>
+                            </ul>
+                        </li>
                     </ul>
-                </li>
-                <li><a href="">Контакты</a></li>
-                <li><a href="">Система</a></li>
-                <li class="activeNav"><a href="">Scanner</a></li>
-                <li><a href="">BlockChain</a></li>
-                <li><a href="">Dex</a></li>
-                <li><a href="">Wallet</a></li>
-            </ul>
         </nav>
         <div class="d-flex align-items-center">
             <label for="searchNav" class="searchInput MainNavbar__search">
