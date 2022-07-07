@@ -33,31 +33,108 @@
         <% end %>
         <nav class="MainNavbar">
             <ul class="d-flex justify-content-between">
-                <li class="dropdown-element">
-                    <a href="#">Blocks</a>
-                    <ul>
-                        <li><a href="">Blocks</a></li>
-                        <li><a href="">Uncles</a></li>
-                        <li><a href="">Forked Blocks (Reorgs)</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown-element">
-                    <a href="#">Transactions</a>
-                    <ul>
-                        <li><a href="">Validated</a></li>
-                        <li><a href="">Pending</a></li>
-                    </ul>
-                </li>
-                <li><a href="">Accounts</a></li>
-                <li><a href="">Tokens</a></li>
-                <li class="dropdown-element">
-                    <a href="#">APIs</a>
-                    <ul>
-                        <li><a href="">GraphQL</a></li>
-                        <li><a href="">RPC</a></li>
-                        <li><a href="">Eth RPC</a></li>
-                     </ul>
-                </li>
+                <%= if Application.get_env(:block_scout_web, BlockScoutWeb.WebRouter)[:enabled] do %>
+                    <li class="dropdown-element">
+                        <a href="#">
+                            <%= gettext("Blocks") %>
+                        </a>
+                        <ul>
+                            <li>
+                                <%= link to: blocks_path(@conn, :index), class: "" do %>
+                                    <%= gettext("Blocks") %>
+                                <% end %>
+                            </li>
+                            <li>
+                                <%= link to: uncle_path(@conn, :uncle), class: "" do %>
+                                    <%= gettext("Uncles") %>
+                                <% end %>
+                            </li>
+                            <li>
+                                <%= link to: reorg_path(@conn, :reorg), class: "" do %>
+                                    <%= gettext("Forked Blocks (Reorgs)") %>
+                                <% end %>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-element">
+                        <a href="#">
+                            <%= gettext("Transactions") %>
+                        </a>
+                        <ul>
+                            <li>
+                                <%= link(
+                                    gettext("Validated"),
+                                    class: "",
+                                    to: transaction_path(@conn, :index)
+                                ) %>
+                            </li>
+                            <% json_rpc_named_arguments = Application.fetch_env!(:indexer, :json_rpc_named_arguments)%>
+                            <% variant = Keyword.fetch!(json_rpc_named_arguments, :variant) %>
+                            <%= if variant !== EthereumJSONRPC.Besu do %>
+                                <li>
+                                    <%= link(
+                                        gettext("Pending"),
+                                        class: "",
+                                        "data-test": "pending_transactions_link",
+                                        to: pending_transaction_path(@conn, :index)
+                                        ) %>
+                                </li>
+                            <% end %>
+                        </ul>
+                    </li>
+                    <li class="dropdown-element">
+                        <a href="#">
+                            <%= gettext("Tokens") %>
+                        </a>
+                        <ul>
+                            <li>
+                                <%= link(
+                                    gettext("All"),
+                                    class: "",
+                                    to: tokens_path(@conn, :index)
+                                ) %>
+                            </li>
+                            <li>
+                                <%= link(
+                                    gettext("Ether"),
+                                    class: "",
+                                    to: address_path(@conn, :index)
+                                ) %>
+                            </li>
+                        </ul>
+                    </li>
+                <% end %>
+                <%= if Application.get_env(:block_scout_web, BlockScoutWeb.ApiRouter)[:reading_enabled] || Application.get_env(:block_scout_web, :api_url) do %>
+                    <li class="dropdown-element">
+                        <a href="#">
+                            <%= gettext("APIs") %>
+                        </a>
+                        <ul>
+                            <li>
+                                <%= link(
+                                    gettext("GraphQL"),
+                                    class: "",
+                                    to: api_url() <> "/graphiql"
+                                ) %>
+                            </li>
+                            <li>
+                                <%= link(
+                                    gettext("RPC"),
+                                    class: "",
+                                    to: api_url() <> api_docs_path(@conn, :index)
+                                ) %>
+                            </li>
+                            <li>
+                                <%= link(
+                                    gettext("Eth RPC"),
+                                    class: "",
+                                    to: api_url() <> api_docs_path(@conn, :eth_rpc)
+                                ) %>
+                            </li>
+                        </ul>
+                    </li>
+                <% end %>
+                
             </ul>
         </nav>
         <div class="d-flex align-items-center">
