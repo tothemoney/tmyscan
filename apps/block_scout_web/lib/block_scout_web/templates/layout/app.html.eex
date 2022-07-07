@@ -209,7 +209,7 @@
       <% true -> %>
         <%= nil %>
     <% end %>
-    <div class="layout-container">
+    <div class="main-wrapper container">
       <% show_maintenance_alert = Application.get_env(:block_scout_web, BlockScoutWeb.Chain)[:show_maintenance_alert] %>
       <%= if show_maintenance_alert do %>
         <div class="alert alert-warning text-center mb-0 p-3" data-selector="indexed-status">
@@ -223,8 +223,8 @@
           <%= gettext("- We're indexing this chain right now. Some of the counts may be inaccurate.") %>
         </div>
       <% end %>
-      <%= render BlockScoutWeb.LayoutView, "_topnav.html", assigns %>
-
+      <%= render BlockScoutWeb.LayoutView, "_wallet_header.html", assigns %>
+      <%= render BlockScoutWeb.LayoutView, "_wallet_aside_toolbar.html", assigns %>
       
     </div>
     <%= if (
