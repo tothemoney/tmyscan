@@ -21,7 +21,7 @@
     </div>
     <div class="header-section_top-navbar d-flex justify-content-between align-items-center">
         <a href="javascript:;" class="walletLogoEl">
-            <img src="/images/wallet/wallet-logo.svg" alt="Logo">
+            <img src="/images/wallet/wallet-logo.png" alt="Logo">
             /:Blocks
         </a>
         <nav class="MainNavbar">
