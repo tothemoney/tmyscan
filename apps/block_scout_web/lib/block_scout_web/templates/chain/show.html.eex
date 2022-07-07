@@ -1,231 +1,147 @@
-<div class='dashboard-banner-container' data-page="chain-details">
-  <div class="container">
-    <div class="dashboard-banner">
-      <!-- Graph and legend -->
-      <div class="dashboard-banner-network-graph">
-        <!-- Graph -->
-        <div class="dashboard-banner-chart">
-          <button data-chart-error-message class="alert alert-danger col-12 text-left mt-5" style="display: none;">
-            <span><%= gettext("There was a problem loading the chart.") %></span>
-          </button>
-          <canvas data-chart="historyChart"
-                  data-history_chart_paths=
-                  '{<%= for {{key, value}, x} <- Enum.with_index(@chart_data_paths) do %>
-                        "<%= key %>":"<%= value %>"
-                        <%= if x<(map_size(@chart_data_paths)-1) do %>
-                        ,
-                        <% end %>
-                  <% end %>}'
-                  data-history_chart_config = '<%= @chart_config_json %>'
-                  width="350" height="152">
-          </canvas>
-        </div>
-        <!-- Legend -->
-        <script>
-         numChartData = <%= Enum.reduce(@chart_config, 0, fn (source, acc) ->
-                        acc + length(elem(source, 1)) end) %>
-         document.documentElement.style.setProperty("--numChartData", numChartData);
-        </script>
-        <div class="dashboard-banner-chart-legend">
-          <%= if Map.has_key?(@chart_config, :market) do %>
-
-            <%# THE FOLLOWING LINE PREVENTS COPY/PASTE ERRORS %>
-            <%# Explicity put @chart_config.market in a variable %>
-            <%# This is done so that when people add a new chart source, x, %>
-            <%# They wont just access @chart_config.x w/o first checking if x exists%>
-            <% market_chart_config = @chart_config.market%>
-
-            <%= if Enum.member?(market_chart_config, :price) do %>
-              <div class="dashboard-banner-chart-legend-item price-per-day">
-                  <span class="dashboard-banner-chart-legend-label">
-                  <%= Explorer.coin_name() %> <%= gettext "Price" %>
-                  </span>
-                  <div class="dashboard-banner-chart-legend-value-container">
-                    <span class="dashboard-banner-chart-legend-value inline" data-selector="exchange-rate" data-wei-value="<%= Explorer.Chain.Wei.from(Decimal.new(1), :ether).value %>" data-usd-exchange-rate="<%= @exchange_rate.usd_value %>">
-                    </span>
-                </div>
-              </div>
-            <% end %>
-            <%= if Enum.member?(@chart_config.market, :market_cap) do %>
-            <div class="dashboard-banner-chart-legend-item market-cap-per-day">
-                <span class="dashboard-banner-chart-legend-label">
-                <%= gettext "Market Cap" %>
-                </span>
-                <div class="d-flex" style="height: 20px; line-height: 20px;">
-                  <% total_market_cap = market_cap(@market_cap_calculation, @exchange_rate) %>
-                  <span style="display: contents;" class="dashboard-banner-chart-legend-value" data-selector="market-cap" data-usd-value="<%= total_market_cap %>">
-                  </span>
-                </div>
-            </div>
-            <% end %>
-          <% end %>
-          <%= render BlockScoutWeb.ChainView, "gas_price_oracle_legend_item.html", gas_price: @gas_price %>
-          <%= if Map.has_key?(@chart_config, :transactions) do %>
-
-            <% transaction_chart_config = @chart_config.transactions%>
-            <%= if Enum.member?(transaction_chart_config, :transactions_per_day) do %>
-            <div class="dashboard-banner-chart-legend-item tx-per-day">
-                <span class="dashboard-banner-chart-legend-label">
-                    <%= gettext "Daily Transactions" %>
-                </span>
-                <span class="dashboard-banner-chart-legend-value" data-selector="tx_per_day">
-                    <% num_of_transactions = BlockScoutWeb.Cldr.Number.to_string!(Enum.at(@transaction_stats, 0).number_of_transactions, format: "#,###") %>
-                    <%= num_of_transactions %>
-                    <% gas_used = Enum.at(@transaction_stats, 0).gas_used %>
-                    <%= if gas_used && gas_used > 0 do %>
-                      <span
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        data-html="true"
-                        data-template="<div class='tooltip tooltip-inversed-color tooltip-gas-usage' role='tooltip'><div class='arrow'></div><div class='tooltip-inner'></div></div>"
-                        title="<div class='custom-tooltip-header'>Gas used</div><div class='custom-tooltip-description'><b><%= BlockScoutWeb.Cldr.Number.to_string!(gas_used, format: "#,###") %><b></div>">
-                        <i style="color: #ffffff;" class="fa fa-info-circle ml-1"></i>
-                      </span>
-                    <% end %>
-                </span>
-            </div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-      <!-- Stats -->
-      <div class="dashboard-banner-network-plain-container">
-        <div class="dashboard-banner-network-stats">
-          <%= case @average_block_time do %>
-            <% {:error, :disabled} -> %>
-              <%= nil %>
-            <% average_block_time -> %>
-              <div class="dashboard-banner-network-stats-item dashboard-banner-network-stats-item-1">
-                <span class="dashboard-banner-network-stats-label">
-                  <%= gettext "Average block time" %>
-                </span>
-                <span class="dashboard-banner-network-stats-value" data-selector="average-block-time">
-                  <%= Timex.format_duration(average_block_time, Explorer.Counters.AverageBlockTimeDurationFormat) %>
-                </span>
-              </div>
-          <% end %>
-          <div class="dashboard-banner-network-stats-item dashboard-banner-network-stats-item-2">
-            <span class="dashboard-banner-network-stats-label">
-              <%= gettext "Total transactions" %>
-            </span>
-            <div class="d-flex">
-              <span class="dashboard-banner-network-stats-value" data-selector="transaction-count">
-                <%= BlockScoutWeb.Cldr.Number.to_string!(@transaction_estimated_count, format: "#,###") %>
-              </span>
-              <%= if @total_gas_usage > 0 do %>
-                <span
-                  data-toggle="tooltip"
-                  data-placement="top"
-                  data-html="true"
-                  data-template="<div class='tooltip tooltip-inversed-color tooltip-gas-usage' role='tooltip'><div class='arrow'></div><div class='tooltip-inner'></div></div>"
-                  title="<div class='custom-tooltip-header'>Total gas used</div><div class='custom-tooltip-description'><b><%= BlockScoutWeb.Cldr.Number.to_string!(@total_gas_usage, format: "#,###") %><b></div>"
-                  class="custom-tooltip-total-transactions">
-                  <i style="color: #ffffff;" class="fa fa-info-circle ml-2"></i>
-                </span>
+<div class="userFinanceBox userFinanceBoxTransactions" data-page="chain-details">
+  <div class="row align-items-center">
+      <div class="col-lg-8 sep-border-right">
+          <label for="search" class="searchInput w100 searchInput-grey">
+              <input type="text" id="search"
+                  placeholder="Search by address, token symbol, name, transaction hash, or block number">
+          </label>
+          <!-- Stats -->
+          <div class="d-flex justify-content-between flex-sm-row flex-column finance-items">
+              <!-- Average block time -->
+              <%= case @average_block_time do %>
+                  <% {:error, :disabled} -> %>
+                  <%= nil %>
+                  <% average_block_time -> %>
+                  <div class="finance-item-info">
+                      <div class="finance-item-info-icon">
+                          <svg width="29" height="29" viewBox="0 0 29 29" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path
+                                  d="M14.5 27C21.4036 27 27 21.4036 27 14.5C27 7.59644 21.4036 2 14.5 2C7.59644 2 2 7.59644 2 14.5C2 21.4036 7.59644 27 14.5 27Z"
+                                  stroke="#6D00F3" stroke-width="3" stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                              <path d="M14.5 2V14.5L23.3462 23.3462" stroke="#6D00F3" stroke-width="3"
+                                  stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                      </div>
+                      <div class="finance-item-info-content">
+                          <div class="finance-item-info-content__label">
+                              <%= gettext "Average block time" %>
+                          </div>
+                          <div class="finance-item-info-content__val"><span>
+                              <%= Timex.format_duration(average_block_time, Explorer.Counters.AverageBlockTimeDurationFormat) %>
+                          </span></div>
+                      </div>
+                  </div>
               <% end %>
-            </div>
+          
+              <!-- Total transactions -->
+              <div class="finance-item-info">
+                  <div class="finance-item-info-icon">
+                      <svg width="29" height="29" viewBox="0 0 29 29" fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                              d="M25.0769 2H3.92308C2.86099 2 2 2.86099 2 3.92308V15.4615C2 16.5236 2.86099 17.3846 3.92308 17.3846H25.0769C26.139 17.3846 27 16.5236 27 15.4615V3.92308C27 2.86099 26.139 2 25.0769 2Z"
+                              stroke="#6D00F3" stroke-width="3" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                          <path
+                              d="M14.4998 12.5768C16.093 12.5768 17.3845 11.2854 17.3845 9.69223C17.3845 8.0991 16.093 6.80762 14.4998 6.80762C12.9067 6.80762 11.6152 8.0991 11.6152 9.69223C11.6152 11.2854 12.9067 12.5768 14.4998 12.5768Z"
+                              stroke="#6D00F3" stroke-width="3" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                          <path d="M3.92383 22.1924H25.0777" stroke="#6D00F3" stroke-width="3"
+                              stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M5.8457 27H23.1534" stroke="#6D00F3" stroke-width="3"
+                              stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                  </div>
+                  <div class="finance-item-info-content">
+                      <div class="finance-item-info-content__label">
+                          <%= gettext "Total transactions" %>
+                      </div>
+                      <div class="finance-item-info-content__val">
+                          <span>
+                              <%= BlockScoutWeb.Cldr.Number.to_string!(@transaction_estimated_count, format: "#,###") %>
+                          </span>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Total blocks -->
+              <div class="finance-item-info">
+                  <div class="finance-item-info-icon">
+                      <svg width="29" height="29" viewBox="0 0 29 29" fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                              d="M25.0769 2H3.92308C2.86099 2 2 2.86099 2 3.92308V15.4615C2 16.5236 2.86099 17.3846 3.92308 17.3846H25.0769C26.139 17.3846 27 16.5236 27 15.4615V3.92308C27 2.86099 26.139 2 25.0769 2Z"
+                              stroke="#6D00F3" stroke-width="3" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                          <path
+                              d="M14.4998 12.5768C16.093 12.5768 17.3845 11.2854 17.3845 9.69223C17.3845 8.0991 16.093 6.80762 14.4998 6.80762C12.9067 6.80762 11.6152 8.0991 11.6152 9.69223C11.6152 11.2854 12.9067 12.5768 14.4998 12.5768Z"
+                              stroke="#6D00F3" stroke-width="3" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                          <path d="M3.92383 22.1924H25.0777" stroke="#6D00F3" stroke-width="3"
+                              stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M5.8457 27H23.1534" stroke="#6D00F3" stroke-width="3"
+                              stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                  </div>
+                  <div class="finance-item-info-content">
+                      <div class="finance-item-info-content__label">
+                          <%= gettext "Total blocks" %>
+                      </div>
+                      <div class="finance-item-info-content__val">
+                          <span>
+                              <%= BlockScoutWeb.Cldr.Number.to_string!(@block_count, format: "#,###") %>
+                          </span>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Wallet addresses -->
+              <div class="finance-item-info">
+                  <div class="finance-item-info-icon">
+                      <svg width="29" height="29" viewBox="0 0 29 29" fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                              d="M17.3846 2H3.92308C3.41305 2 2.9239 2.20261 2.56326 2.56326C2.20261 2.9239 2 3.41305 2 3.92308V25.0769C2 25.587 2.20261 26.0761 2.56326 26.4367C2.9239 26.7974 3.41305 27 3.92308 27H25.0769C25.587 27 26.0761 26.7974 26.4367 26.4367C26.7974 26.0761 27 25.587 27 25.0769V11.6154L17.3846 2Z"
+                              stroke="#6D00F3" stroke-width="3" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                          <path
+                              d="M17.3838 10.6538V2L26.9992 11.6154H18.3453C18.0903 11.6154 17.8457 11.5141 17.6654 11.3338C17.4851 11.1534 17.3838 10.9089 17.3838 10.6538Z"
+                              stroke="#6D00F3" stroke-width="3" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                          <path d="M9.69238 9.69223V6.80762" stroke="#6D00F3" stroke-width="3"
+                              stroke-linecap="round" stroke-linejoin="round" />
+                          <path
+                              d="M6.80762 17.3847C6.80762 18.827 8.09608 19.3078 9.69223 19.3078C11.2884 19.3078 12.5768 19.3078 12.5768 17.3847C12.5768 14.5001 6.80762 14.5001 6.80762 11.6155C6.80762 9.69238 8.09608 9.69238 9.69223 9.69238C11.2884 9.69238 12.5768 10.4232 12.5768 11.6155"
+                              stroke="#6D00F3" stroke-width="3" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                          <path d="M9.69238 19.3076V22.1922" stroke="#6D00F3" stroke-width="3"
+                              stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M17.3838 19.3076H23.153" stroke="#6D00F3" stroke-width="3"
+                              stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                  </div>
+                  <div class="finance-item-info-content">
+                      <div class="finance-item-info-content__label">
+                          <%= gettext "Wallet addresses" %>
+                      </div>
+                      <div class="finance-item-info-content__val">
+                          <span>
+                              <%= BlockScoutWeb.Cldr.Number.to_string!(@address_count, format: "#,###") %>
+                          </span>
+                      </div>
+                  </div>
+              </div>
           </div>
-          <div class="dashboard-banner-network-stats-item dashboard-banner-network-stats-item-3">
-            <span class="dashboard-banner-network-stats-label">
-              <%= gettext "Total blocks" %>
-            </span>
-            <span class="dashboard-banner-network-stats-value" data-selector="block-count">
-              <%= BlockScoutWeb.Cldr.Number.to_string!(@block_count, format: "#,###") %>
-            </span>
-          </div>
-          <div class="dashboard-banner-network-stats-item dashboard-banner-network-stats-item-4">
-            <span class="dashboard-banner-network-stats-label">
-              <%= gettext "Wallet addresses" %>
-            </span>
-            <span class="dashboard-banner-network-stats-value" data-selector="address-count">
-              <%= BlockScoutWeb.Cldr.Number.to_string!(@address_count, format: "#,###") %>
-            </span>
-          </div>
-        </div>
       </div>
-    </div>
+      <div class="col-lg-4">
+          <div class="pl-lg-4">
+              <div class="chartHeading">
+                  <%= gettext "Daily Transactions" %>
+              </div>
+              <!-- <canvas id="myChart" width="100%" height="100" class="chartEl"></canvas> -->
+          </div>
+      </div>
   </div>
 </div>
-<section class="container">
-  <div class="card card-chain-blocks js-ad-dependant-mb-3">
-    <div class="card-body">
-      <%= link(gettext("View All Blocks"), to: blocks_path(BlockScoutWeb.Endpoint, :index), class: "btn-line float-right") %>
-      <h2 class="card-title"><%= gettext "Blocks" %></h2>
-      <div class="row" data-selector="chain-block-list" data-url="<%= chain_blocks_path(@conn, :chain_blocks) %>">
-        <button data-selector="error-message" class="alert alert-danger col-12 text-left" style="display: none;">
-          <span class="alert-link">
-            <%= gettext "Something went wrong, click to reload." %>
-          </span>
-        </button>
-        <div hidden data-selector="loading-message" class="col-lg-3" >
-         <div data-selector="chain-block">
-           <div class="tile tile-type-block n-p d-flex flex-column">
-             <a class="tile-title"><span class="tile-loader tile-label-loader"></span> </a>
-             <div class="tile-bottom-contents">
-               <div class="dark-block-loader"></div>
-               <div class="dark-block-loader"></div>
-             </div>
-           </div>
-         </div>
-        </div>
-        <div hidden data-selector="loading-message" class="col-lg-3" >
-         <div data-selector="chain-block">
-           <div class="tile tile-type-block n-p d-flex flex-column">
-             <a class="tile-title"><span class="tile-loader tile-label-loader"></span> </a> 
-             <div class="tile-bottom-contents">
-               <div class="dark-block-loader"></div>
-               <div class="dark-block-loader"></div>
-             </div>
-           </div>
-         </div>
-        </div>
-        <div hidden data-selector="loading-message" class="col-lg-3" >
-         <div data-selector="chain-block">
-           <div class="tile tile-type-block n-p d-flex flex-column">
-             <a class="tile-title"><span class="tile-loader tile-label-loader"></span> </a> 
-             <div class="tile-bottom-contents">
-               <div class="dark-block-loader"></div>
-               <div class="dark-block-loader"></div>
-             </div>
-           </div>
-         </div>
-        </div>
-        <div hidden data-selector="loading-message" class="col-lg-3" >
-         <div data-selector="chain-block">
-           <div class="tile tile-type-block n-p d-flex flex-column">
-             <a class="tile-title"><span class="tile-loader tile-label-loader"></span> </a>
-             <div class="tile-bottom-contents">
-              <div class="dark-block-loader"></div>
-              <div class="dark-block-loader"></div>
-            </div>
-           </div>
-         </div>
-        </div>   
-      </div>
-    </div>
-  </div>
-
-  <%= render BlockScoutWeb.Advertisement.BannersAdView, "_banner_728.html", conn: @conn %>
-
-  <div class="card card-chain-transactions">
-    <div class="card-body">
-      <%= link(gettext("View All Transactions"), to: transaction_path(BlockScoutWeb.Endpoint, :index), class: "btn-line float-right") %>
-      <h2 class="card-title lg-card-title"><%= gettext "Transactions" %></h2>
-      <div data-selector="channel-batching-message" style="display: none;">
-        <div data-selector="reload-transactions-button" class="alert alert-info">
-          <a href="#" class="alert-link"><span data-selector="channel-batching-count"></span> <%= gettext "More transactions have come in" %></a>
-        </div>
-      </div>
-      <span data-selector="transactions-list" data-transactions-path="<%= @transactions_path %>">
-        <button data-selector="error-message" class="alert alert-danger col-12 text-left" style="display: none;">
-          <span class="alert-link">
-            <%= gettext "Something went wrong, click to retry." %>
-          </span>
-        </button>
-        <div hidden data-selector="loading-message">
-          <%= render BlockScoutWeb.CommonComponentsView, "_tile-loader.html" %>
-        </div>
-      </span>
-    </div>
-  </div>
-</section>
