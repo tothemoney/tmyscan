@@ -510,11 +510,10 @@ input:not([type="submit"]) {
 }
 
 .chartEl {
-  &#myChart.chartEl {
-    height: 100px !important;
-  }
+  height: 110px !important;
+}
 
-  &#myChartTrans.chartEl {
-    height: 260px !important;
-  }
+.userFinanceBox {
+  margin-bottom: 26px;
+  border-radius: 10px;
 }

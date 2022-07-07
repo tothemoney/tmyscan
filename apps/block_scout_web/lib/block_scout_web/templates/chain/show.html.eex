@@ -141,7 +141,7 @@
               <div class="chartHeading">
                   <%= gettext "Daily Transactions" %>
               </div>
-              <div class="dashboard-banner-chart">
+              <div class="chartEl">
                 <button data-chart-error-message class="alert alert-danger col-12 text-left mt-5" style="display: none;">
                   <span><%= gettext("There was a problem loading the chart.") %></span>
                 </button>
@@ -192,6 +192,7 @@
                       </span>
                       <div class="d-flex" style="height: 20px; line-height: 20px;">
                         <% total_market_cap = market_cap(@market_cap_calculation, @exchange_rate) %>
+                        <!-- Market Cap -->
                         <span style="display: contents;" class="dashboard-banner-chart-legend-value" data-selector="market-cap" data-usd-value="<%= total_market_cap %>">
                         </span>
                       </div>

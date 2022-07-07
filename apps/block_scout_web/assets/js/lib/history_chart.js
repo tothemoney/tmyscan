@@ -212,7 +212,7 @@ class MarketHistoryChart {
       cubicInterpolationMode: 'monotone',
       pointRadius: 0,
       backgroundColor: priceLineColor,
-      borderColor: priceLineColor
+      borderColor: "#6D00F3" // <-- Color line
       // lineTension: 0
     }
     if (dataConfig.market === undefined || dataConfig.market.indexOf('price') === -1) {
@@ -229,7 +229,7 @@ class MarketHistoryChart {
       cubicInterpolationMode: 'monotone',
       pointRadius: 0,
       backgroundColor: mcapLineColor,
-      borderColor: mcapLineColor
+      borderColor: "#6D00F3" // <-- Color line
       // lineTension: 0
     }
     if (dataConfig.market === undefined || dataConfig.market.indexOf('market_cap') === -1) {
@@ -248,7 +248,7 @@ class MarketHistoryChart {
       fill: false,
       pointRadius: 0,
       backgroundColor: getTxChartColor(),
-      borderColor: getTxChartColor()
+      borderColor: "#6D00F3" // <-- Color line
       // lineTension: 0
     }
 
