@@ -508,3 +508,13 @@ input:not([type="submit"]) {
   text-align: center;
   color: #474C5F;
 }
+
+.chartEl {
+  &#myChart.chartEl {
+    height: 100px !important;
+  }
+
+  &#myChartTrans.chartEl {
+    height: 260px !important;
+  }
+}

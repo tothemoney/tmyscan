@@ -140,6 +140,17 @@
               <div class="chartHeading">
                   <%= gettext "Daily Transactions" %>
               </div>
+              <canvas id="myChart" class="chartEl" data-chart="historyChart"
+                      data-history_chart_paths=
+                      '{<%= for {{key, value}, x} <- Enum.with_index(@chart_data_paths) do %>
+                            "<%= key %>":"<%= value %>"
+                            <%= if x<(map_size(@chart_data_paths)-1) do %>
+                            ,
+                            <% end %>
+                      <% end %>}'
+                      data-history_chart_config = '<%= @chart_config_json %>'
+                      width="100%" height="100">
+              </canvas>
               <!-- <canvas id="myChart" width="100%" height="100" class="chartEl"></canvas> -->
           </div>
       </div>
