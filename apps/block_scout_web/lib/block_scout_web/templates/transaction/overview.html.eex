@@ -89,16 +89,20 @@
           </div>
           <!-- Verify in other explorers -->
           <!-- <%= render BlockScoutWeb.AddressView, "_verify_other_explorers.html", hash: hash(@transaction), type: "tx" %> -->
+
           <!-- Result -->
           <div class="secBox-list__item">
             <div class="secBox-list__item-label">
               <%= gettext "Result: " %>
             </div>
-            <div class="secBox-list__item-txt" data-transaction-status="<%= formatted_result %>">
+            <div class="secBox-list__item-txt">
               <% formatted_result = BlockScoutWeb.TransactionView.formatted_result(status) %>
+
               <%= render BlockScoutWeb.CommonComponentsView, "_status_icon.html", status: status %><%= formatted_result %>
+              <span data-transaction-status="<%= formatted_result %>"><%= render BlockScoutWeb.CommonComponentsView, "_status_icon.html", status: status %><%= formatted_result %></span>
             </div>
           </div>
+
           <!-- Status -->
           <div class="secBox-list__item">
             <div class="secBox-list__item-label">
