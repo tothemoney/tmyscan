@@ -2,8 +2,14 @@
   <div class="row align-items-center">
       <div class="col-lg-8 sep-border-right">
           <label for="search" class="searchInput w100 searchInput-grey">
-              <input type="text" id="search"
-                  placeholder="Search by address, token symbol, name, transaction hash, or block number">
+              <input
+                id="<%= @id %>"
+                type="text"
+                data-test="search_input"
+				        data-chain-id="<%= System.get_env("CHAIN_ID") %>"
+                data-display-token-icons="<%= System.get_env("DISPLAY_TOKEN_ICONS") %>"
+                tabindex="1"
+                placeholder="Search by address, token symbol, name, transaction hash, or block number">
           </label>
           <!-- MARK: Stats -->
           <div class="d-flex justify-content-between flex-sm-row flex-column finance-items">

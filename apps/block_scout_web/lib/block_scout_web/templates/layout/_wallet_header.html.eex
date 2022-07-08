@@ -14,8 +14,8 @@
                     <span >0</span>
                 </div>
             <div class="top_marketInfo_item mr57">
-                     
-                    <span><%= gettext "Market Cap" %>: 0</span>
+                    <%= gettext "Market Cap" %>: 
+                    <span>0</span>
                 </div>
             <div class="dropdown-element dropdown-element-lang">
                 <a href="#">in English</a>
