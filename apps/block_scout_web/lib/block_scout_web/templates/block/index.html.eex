@@ -1,8 +1,6 @@
 <section class="container clear-container" data-page="<%= String.downcase(@block_type) %>-list">
   <%= render BlockScoutWeb.Advertisement.TextAdView, "index.html", conn: @conn %>
-  <div class="card card-chain-blocks-fix">
-    <div class="card-body" data-async-listing="<%= @current_path %>">
-      <%= render BlockScoutWeb.CommonComponentsView, "_channel_disconnected_message.html", text: gettext("Connection Lost, click to load newer blocks") %>
+ <%= render BlockScoutWeb.CommonComponentsView, "_channel_disconnected_message.html", text: gettext("Connection Lost, click to load newer blocks") %>
 
       <!-- TABLE BLOCKS  -->
       <div class="tableEl-wrapper tableEl-wrapper-pdSm tableEl-shadows">
@@ -37,8 +35,5 @@
       <div data-empty-response-message style="display: none;">
           <span><%= gettext "There are no blocks." %></span>
       </div>
-
-    </div>
-  </div>
   <script defer data-cfasync="false" src="<%= static_path(@conn, "/js/blocks.js") %>"></script>
 </section>
