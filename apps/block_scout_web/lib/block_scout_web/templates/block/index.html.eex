@@ -14,13 +14,16 @@
         <!-- TABLE BLOCKS HEADER  -->
         <div class="tableEl tableEl-header-shown-responsive tableEl-Beetween tableEl-row-between">
           <div class="tableEl-header">
-            <div class="tableEl-header-col">№ БЛОКА</div>
-              <div class="tableEl-header-col onlydesktop">ВОЗРАСТ</div>
-              <div class="tableEl-header-col">ТРАНЗАКЦИИ</div>
-              <div class="tableEl-header-col onlydesktop">ИСПОЛЬЗОВАНИЕ КОМИССИИ</div>
-              <div class="tableEl-header-col onlydesktop">БАЗОВАЯ ВЫПЛАТА</div>
-              <div class="tableEl-header-col onlydesktop">СГОРЕЛО</div>
-              <div class="tableEl-header-col">НАГРАДА</div>
+            <div class="tableEl-header-col">№ Block</div>
+              <div class="tableEl-header-col onlydesktop">Transactions</div>
+              <div class="tableEl-header-col">Block size</div>
+              <div class="tableEl-header-col onlydesktop">Age</div>
+              <div class="tableEl-header-col onlydesktop">Miner</div>
+              <div class="tableEl-header-col onlydesktop">Priority Fee</div>
+              <div class="tableEl-header-col">Burnt Fees</div>
+              <div class="tableEl-header-col">Gas Limit</div>
+              <div class="tableEl-header-col">Gas Used</div>
+              
           </div>
 
           <div data-items>
