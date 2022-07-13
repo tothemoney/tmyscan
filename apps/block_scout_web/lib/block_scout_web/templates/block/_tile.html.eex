@@ -55,11 +55,14 @@
         </div>
       <% end %>
   </div>
-  <div class="tableEl-row-cell purpleCol data-cell-header-hide onlydesktop" data-cell-header="Priority Fee">
+  <%= if !is_nil(@block.base_fee_per_gas) do %>
+     <div class="tableEl-row-cell purpleCol data-cell-header-hide onlydesktop" data-cell-header="Priority Fee">
     <%= if !is_nil(@block.base_fee_per_gas) do %>
       <%= format_wei_value(%Wei{value: priority_fee}, :ether) %>
     <% end %>
   </div>
+  <% end %>
+  
   <div class="tableEl-row-cell purpleCol data-cell-header-hide onlydesktop" data-cell-header="Burnt Fees">
     <%= if !is_nil(@block.base_fee_per_gas) do %>
       <%= format_wei_value(burned_fee, :ether) %>
