@@ -24,8 +24,10 @@
               <div class="tableEl-header-col">Gas Used</div>
               
           </div>
-
-          <%= render BlockScoutWeb.CommonComponentsView, "_tile-loader.html" %>
+          
+          <div class="tableEl-row-wrapper">
+            <%= render BlockScoutWeb.CommonComponentsView, "_tile-loader.html" %>
+          </div>
         </div>
 
       </div>
