@@ -612,3 +612,48 @@ input:not([type="submit"]) {
 .fix-card-title {
   margin-bottom: 3rem;
 }
+
+
+// TABLE
+
+.secBox,
+.tableEl-wrapper {
+    width: 100%;
+    padding: 36px 39px;
+    background: #F7F8FC;
+    border-radius: 10px;
+}
+
+.tableEl-header {
+  font-size: 9px;
+}
+
+
+.tableEl-header-shown-responsive .tableEl-header {
+  display: table-row !important;
+}
+
+.tableEl-header-shown-responsive {
+  display: table !important;
+}
+
+
+.tableEl-header,
+.tableEl-row {
+  display: table-row;
+}
+
+.tableEl-row-cell,
+.tableEl-header-col {
+  display: table-cell;
+}
+
+.tableEl-header .tableEl-header-col {
+  border-bottom: 1px solid #D8E7FF;
+  padding-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.onlydesktop {
+  display: table-cell;
+}
