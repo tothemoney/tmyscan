@@ -4,20 +4,36 @@
     <div class="card-body" data-async-listing="<%= @current_path %>">
       <%= render BlockScoutWeb.CommonComponentsView, "_channel_disconnected_message.html", text: gettext("Connection Lost, click to load newer blocks") %>
 
-      <h1 class="card-title list-title-description"><%= gettext("%{block_type}s", block_type: @block_type) %></h1>
+      <!-- TABLE BLOCKS  -->
+      <div class="tableEl-wrapper tableEl-wrapper-pdSm tableEl-shadows">
+        <!-- TABLE BLOCKS HEADER  -->
+        <div class="tableEl-pre-heading d-flex align-items-center">
+          <div class="tableEl-pre-heading__title"><%= gettext("%{block_type}s", block_type: @block_type) %></div>
+        </div>
 
-      <div class="list-top-pagination-container-wrapper">
-        <%= render BlockScoutWeb.CommonComponentsView, "_pagination_container.html", position: "top", cur_page_number: "1", show_pagination_limit: true, data_next_page_button: true, data_prev_page_button: true %>
+        <!-- TABLE BLOCKS HEADER  -->
+        <div class="tableEl tableEl-header-shown-responsive tableEl-Beetween tableEl-row-between">
+          <div class="tableEl-header">
+            <div class="tableEl-header-col">№ БЛОКА</div>
+              <div class="tableEl-header-col onlydesktop">ВОЗРАСТ</div>
+              <div class="tableEl-header-col">ТРАНЗАКЦИИ</div>
+              <div class="tableEl-header-col onlydesktop">ИСПОЛЬЗОВАНИЕ КОМИССИИ</div>
+              <div class="tableEl-header-col onlydesktop">БАЗОВАЯ ВЫПЛАТА</div>
+              <div class="tableEl-header-col onlydesktop">СГОРЕЛО</div>
+              <div class="tableEl-header-col">НАГРАДА</div>
+          </div>
+
+          <div data-items>
+            <%= render BlockScoutWeb.CommonComponentsView, "_tile-loader.html" %>
+          </div>
+        </div>
+
       </div>
 
-      <div data-items>
-        <%= render BlockScoutWeb.CommonComponentsView, "_tile-loader.html" %>
-      </div>
+      
       <div data-empty-response-message style="display: none;">
           <span><%= gettext "There are no blocks." %></span>
       </div>
-
-      <%= render BlockScoutWeb.CommonComponentsView, "_pagination_container.html", position: "bottom", cur_page_number: "1", show_pagination_limit: true, data_next_page_button: true, data_prev_page_button: true %>
 
     </div>
   </div>
