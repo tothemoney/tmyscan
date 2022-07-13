@@ -11,7 +11,7 @@
         </div>
 
         <!-- TABLE BLOCKS HEADER  -->
-        <div class="tableEl tableEl-header-shown-responsive tableEl-Beetween tableEl-row-between" data-items>
+        <div class="tableEl tableEl-header-shown-responsive tableEl-Beetween tableEl-row-between">
           <div class="tableEl-header">
               <div class="tableEl-header-col">№ Block</div>
               <div class="tableEl-header-col onlydesktop">Transactions</div>
@@ -25,7 +25,7 @@
               
           </div>
           
-          <div class="tableEl-row-wrapper">
+          <div class="tableEl-row-wrapper" data-items>
             <%= render BlockScoutWeb.CommonComponentsView, "_tile-loader.html" %>
           </div>
         </div>
