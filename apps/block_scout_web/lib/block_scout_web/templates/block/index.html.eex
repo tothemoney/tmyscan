@@ -17,15 +17,11 @@
               <div class="tableEl-header-col onlydesktop">Transactions</div>
               <div class="tableEl-header-col">Block size</div>
               <div class="tableEl-header-col onlydesktop">Age</div>
-              <div class="tableEl-header-col onlydesktop">Miner</div>
-              <%= if !is_nil(@block.base_fee_per_gas) do %>
-     <div class="tableEl-header-col onlydesktop">Priority Fee</div>
-  <% end %>
-              
+              <div class="tableEl-header-col onlydesktop">Miner/Reward</div>
+              <div class="tableEl-header-col onlydesktop">Priority Fee</div>
               <div class="tableEl-header-col">Burnt Fees</div>
               <div class="tableEl-header-col">Gas Limit</div>
               <div class="tableEl-header-col">Gas Used</div>
-              
           </div>
           
           <div class="tableEl-row-wrapper" data-items>
