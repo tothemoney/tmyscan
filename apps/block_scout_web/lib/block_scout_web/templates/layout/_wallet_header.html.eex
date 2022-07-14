@@ -143,13 +143,7 @@
                 <input type="text" id="searchNav" placeholder="Введите запрос..">
             </label>
             <div class="userBox d-flex align-items-center">
-                <a href="#" class="userBox-name">Екатерина Климова</a>
-                <div class="userBox-avatar">
-                    <img src="/images/wallet/avatar.jpg" alt="">
-                    <a href="#" class="userBox-exit">
-                        
-                    </a>
-                </div>
+               
             </div>
         </div>
     </div>
