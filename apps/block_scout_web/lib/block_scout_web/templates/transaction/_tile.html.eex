@@ -23,10 +23,6 @@
 
   <div class="tableEl-row-cell purpleCol data-cell-header-hide" data-cell-header="Hash">
     <%= render "_link.html", transaction_hash: @transaction.hash, data_test: "address_hash_link" %>
-    <% method_name = Transaction.get_method_name(@transaction) %>
-    <%= if method_name do %>
-      <%= render BlockScoutWeb.FormView, "_tag.html", text: method_name, additional_classes: ["method", "ml-1"] %>
-    <% end %>
   </div>
 
   <div class="tableEl-row-cell purpleCol data-cell-header-hide" data-cell-header="Sender/Receiver">

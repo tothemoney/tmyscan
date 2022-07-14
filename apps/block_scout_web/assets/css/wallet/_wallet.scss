@@ -765,5 +765,9 @@ input:not([type="submit"]) {
 }
 
 .truncate {
-  width: 200px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 0.;
+  -webkit-box-orient: vertical;
+  width: 150px;
 }
