@@ -1,4 +1,4 @@
-defmodule MyApp.StringFormatter do
+defmodule BlockScoutWeb.StringFormatter do
 
   def truncate(text, opts \\ []) do
     max_length  = opts[:max_length] || 50

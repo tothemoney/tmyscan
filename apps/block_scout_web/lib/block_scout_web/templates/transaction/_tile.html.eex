@@ -22,7 +22,7 @@
   </div>
 
   <div class="tableEl-row-cell purpleCol data-cell-header-hide" data-cell-header="Hash">
-    <%= render "_link.html", transaction_hash: String.slice(@transaction.hash, 0..22), data_test: "address_hash_link" %>
+    <%= render "_link.html", transaction_hash: @transaction.hash, data_test: "address_hash_link" %>
     <% method_name = Transaction.get_method_name(@transaction) %>
     <%= if method_name do %>
       <%= render BlockScoutWeb.FormView, "_tag.html", text: method_name, additional_classes: ["method", "ml-1"] %>
@@ -52,7 +52,7 @@
 
   <div class="tableEl-row-cell purpleCol data-cell-header-hide" data-cell-header="Transfer">
     <%= if involves_token_transfers?(@transaction) do %>
-      <div class="d-flex flex-column mt-2 truncate">
+      <div class="d-flex flex-column mt-2 ">
         <% [first_token_transfer | remaining_token_transfers] = @transaction.token_transfers %>
 
         <%= render "_token_transfer.html", address: assigns[:current_address], token_transfer: first_token_transfer %>
