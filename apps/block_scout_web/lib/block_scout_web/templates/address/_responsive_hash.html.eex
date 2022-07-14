@@ -42,7 +42,7 @@
       </span>
       <span class="d-md-inline-block d-xl-none">
         <!-- <%= BlockScoutWeb.AddressView.trimmed_hash(@address.hash) %> -->
-        <%=  "#{String.slice("#{@@address.hash}",0..20)}..." %>
+        <%=  "#{String.slice("#{@address.hash}",0..20)}..." %>
       </span>
     <% end %>
   <% end %>
