@@ -49,6 +49,7 @@
       </div>
     </div>
 
+    <%= render BlockScoutWeb.CommonComponentsView, "_rap_pagination_container.html", position: "bottom" %>
   </div>
   <script defer data-cfasync="false" src="<%= static_path(@conn, "/js/validated-transactions.js") %>"></script>
   <script defer data-cfasync="false" src="<%= static_path(@conn, "/js/token-transfers-toggle.js") %>"></script>
