@@ -235,18 +235,17 @@
           <a href="#" class="alert-link"><span data-selector="channel-batching-count"></span> <%= gettext "More transactions have come in" %></a>
         </div>
       </div>
-      <span data-selector="transactions-list" data-transactions-path="<%= @transactions_path %>">
-        <button data-selector="error-message" class="alert alert-danger col-12 text-left" style="display: none;">
+      <button data-selector="error-message" class="alert alert-danger col-12 text-left" style="display: none;">
           <span class="alert-link">
             <%= gettext "Something went wrong, click to retry." %>
           </span>
         </button>
        
         <!-- TRANSACTIONS BLOCKS  -->
-        <div class="tableEl-wrapper tableEl-wrapper-pdSm tableEl-shadows">
+        <div class="tableEl-wrapper tableEl-wrapper-pdSm tableEl-shadows" data-selector="transactions-list" data-transactions-path="<%= @transactions_path %>"> 
           <!-- TABLE BLOCKS HEADER  -->
           <div class="tableEl-pre-heading d-flex align-items-center">
-            <div class="tableEl-pre-heading__title"><%= gettext "Validated Transactions" %></div>
+            
           </div>
           <!-- TABLE TRANSACTIONS HEADER  -->
           <div class="tableEl tableEl-header-shown-responsive tableEl-Beetween tableEl-row-between">
@@ -266,9 +265,6 @@
             </div>
           </div>
         </div>
-
-
-      </span>
     </div>
   </div>
 </section>

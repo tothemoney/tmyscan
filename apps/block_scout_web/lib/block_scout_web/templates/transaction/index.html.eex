@@ -49,7 +49,19 @@
       </div>
     </div>
 
-    <%= render BlockScoutWeb.CommonComponentsView, "_rap_pagination_container.html", position: "bottom" %>
+    <div class="tableEl-wrapper tableEl-shadows" style="display: none;">
+      <div class="tableEl-footer-filters d-flex justify-content-between align-items-center">
+        <div class="tableEl-footer-filters_paging d-lg-flex align-items-center"></div>
+        <div class="tableEl-filter-items"></div>
+        <div class="tableEl-footer-filters_paging d-lg-flex align-items-center">
+          <span>Страницы</span>
+             <ul class="tableEl-footer-filters_paging-pages d-flex">
+              <li class="acitvePage"><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
   <script defer data-cfasync="false" src="<%= static_path(@conn, "/js/validated-transactions.js") %>"></script>
   <script defer data-cfasync="false" src="<%= static_path(@conn, "/js/token-transfers-toggle.js") %>"></script>

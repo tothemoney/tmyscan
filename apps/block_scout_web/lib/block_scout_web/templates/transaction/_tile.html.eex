@@ -19,7 +19,7 @@
     </span>
   </div>
   <div
-    class="tableEl-row-cell blockTimingCol headingMobileShown mw-106p"
+    class="tableEl-row-cell blockTimingCol headingMobileShown mw-149p"
     data-cell-header="HASH"
   >
     <span class="purpleCol">
@@ -27,7 +27,7 @@
     </span>
   </div>
   <div
-    class="tableEl-row-cell blockTimingCol headingMobileShown"
+    class="tableEl-row-cell blockTimingCol headingMobileShown mw-149p"
     data-cell-header="SENDER/RECEIVER"
   >
     <div class="d-flex flex-column">
