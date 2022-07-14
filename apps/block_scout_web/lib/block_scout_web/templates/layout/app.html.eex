@@ -228,6 +228,18 @@
       <%= render BlockScoutWeb.LayoutView, "_wallet_aside_toolbar.html", assigns %>
 
       <%= @inner_content %>
+
+
+      <!-- TRUNCATE TEXT -->
+      <script>
+        const subjects = document.querySelectorAll(".truncate");
+        subjects.forEach(subject => {
+          let text = subject.textContent;
+          if (text.length > 22) {
+            subject.textContent = `${text.slice(0, 22)}...`;
+          }
+        });
+      </script>
       
     </div>
     <%= if (

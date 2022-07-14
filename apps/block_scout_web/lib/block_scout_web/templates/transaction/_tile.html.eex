@@ -30,10 +30,21 @@
   </div>
 
   <div class="tableEl-row-cell purpleCol data-cell-header-hide" data-cell-header="Sender/Receiver">
-    <span>
+    <span class="truncate">
       <%= @transaction |> BlockScoutWeb.AddressView.address_partial_selector(:from, assigns[:current_address]) |> BlockScoutWeb.RenderHelpers.render_partial() %>
-      &rarr;
+    </span>
+    <span>&rarr;</span>
+    <span class="truncate">
       <%= @transaction |> BlockScoutWeb.AddressView.address_partial_selector(:to, assigns[:current_address]) |> BlockScoutWeb.RenderHelpers.render_partial() %>
+    </span>
+  </div>
+
+  <div class="tableEl-row-cell purpleCol data-cell-header-hide" data-cell-header="Amount">
+    <span class="tile-title">
+      <%= value(@transaction, include_label: false) %> <%= gettext "Ether" %>
+    </span>
+    <span class="ml-0 ml-md-1 text-nowrap">
+      <%= formatted_fee(@transaction, denomination: :ether, include_label: false) %> <%= gettext "TX Fee" %>
     </span>
   </div>
 
