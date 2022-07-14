@@ -241,13 +241,14 @@
             <%= gettext "Something went wrong, click to retry." %>
           </span>
         </button>
-        <!-- TABLE BLOCKS  -->
+       
+        <!-- TRANSACTIONS BLOCKS  -->
         <div class="tableEl-wrapper tableEl-wrapper-pdSm tableEl-shadows">
           <!-- TABLE BLOCKS HEADER  -->
           <div class="tableEl-pre-heading d-flex align-items-center">
-            <div class="tableEl-pre-heading__title"></div>
+            <div class="tableEl-pre-heading__title"><%= gettext "Validated Transactions" %></div>
           </div>
-          <!-- TABLE BLOCKS HEADER  -->
+          <!-- TABLE TRANSACTIONS HEADER  -->
           <div class="tableEl tableEl-header-shown-responsive tableEl-Beetween tableEl-row-between">
             <div class="tableEl-header">
               <div class="tableEl-header-col">Type</div>
@@ -265,6 +266,8 @@
             </div>
           </div>
         </div>
+
+
       </span>
     </div>
   </div>
