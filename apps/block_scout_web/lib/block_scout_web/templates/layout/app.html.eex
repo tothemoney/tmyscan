@@ -230,15 +230,7 @@
       <%= @inner_content %>
 
 
-      <!-- TRUNCATE TEXT -->
-      <script>
-        document.querySelectorAll(".truncate").forEach(subject => {
-          let text = subject.textContent;
-          if (text.length > 22) {
-            subject.textContent = `${text.slice(0, 22)}...`;
-          }
-        })
-      </script>
+      
       
     </div>
     <%= if (
