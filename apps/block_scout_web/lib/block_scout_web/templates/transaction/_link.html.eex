@@ -1,4 +1,4 @@
-<%= link(@transaction_hash,
+<%= link("#{String.slice("#{@transaction_hash}",0..20)}...",
     to: transaction_path(BlockScoutWeb.Endpoint, :show, @transaction_hash),
     "data-test": "transaction_hash_link",
     class: "text-truncate truncate purpleCol") %>

@@ -36,8 +36,8 @@
     data-cell-header="HASH"
   >
     <span class="text-truncate d-flex purpleCol">
-      
-      <%= String.slice("#{@transaction.hash}",0..20) %>
+      <%= render "_link.html", transaction_hash: @transaction.hash, data_test: "address_hash_link" %>
+
       <!-- 
         <%= render "_link.html", transaction_hash: @transaction.hash, data_test: "address_hash_link" %>
         <% method_name = Transaction.get_method_name(@transaction) %>
