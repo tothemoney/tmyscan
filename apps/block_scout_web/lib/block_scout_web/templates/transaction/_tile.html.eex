@@ -2,7 +2,7 @@
 <% error_in_internal_tx = @transaction.has_error_in_internal_txs %>
 
 
-<div class="tableEl-row" data-test="<%= type_suffix(@transaction) %>" data-identifier-hash="<%= @transaction.hash %>">
+<div class="tableEl-row" data-test="<%= type_suffix(@transaction) %>" data-identifier-hash="<%= @transaction.hash %>" data-selector="token-transfers-toggle" data-test="chain_transaction">
   <div class="tableEl-row-cell purpleCol data-cell-header-hide" data-cell-header="Type">
     <span class="tile-label" data-test="transaction_type">  
       <%= transaction_display_type(@transaction) %>
