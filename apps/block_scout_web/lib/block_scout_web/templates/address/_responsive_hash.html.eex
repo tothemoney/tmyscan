@@ -20,11 +20,11 @@
         <span><%= name %> (<%= short_hash(@address) %>...)</span>
       <% else %>
         <span data-toggle="tooltip" data-placement="top" title="<%= @address %>" data-custom-class="<%= if assigns[:custom_classes_tooltip], do: @custom_classes_tooltip |> Enum.join(" ") %>">
-          <span class="d-none d-md-none d-lg-inline d-xl-inline">
+          <span class="d-none d-md-none d-lg-inline d-xl-inline purpleCol">
             <!-- <%= short_contract_name(name, 30) %> -->
             <%=  "#{String.slice("#{name}",0..20)}..." %>
           </span>
-          <span class="d-inline d-md-inline d-lg-none d-xl-none">
+          <span class="d-inline d-md-inline d-lg-none d-xl-none purpleCol">
             <!-- <%= short_contract_name(name, 10) %> -->
             <%=  "#{String.slice("#{name}",0..10)}..." %>
           </span>
@@ -36,11 +36,11 @@
     <%= if assigns[:truncate] do %>
       <%= BlockScoutWeb.AddressView.trimmed_hash(@address.hash) %>
     <% else %>
-      <span class="d-none d-md-none d-xl-inline">
+      <span class="d-none d-md-none d-xl-inline purpleCol">
         <!-- <%= @address %> -->
         <%=  "#{String.slice("#{@address}",0..20)}..." %>
       </span>
-      <span class="d-md-inline-block d-xl-none">
+      <span class="d-md-inline-block d-xl-none purpleCol">
         <!-- <%= BlockScoutWeb.AddressView.trimmed_hash(@address.hash) %> -->
         <%=  "#{String.slice("#{@address.hash}",0..20)}..." %>
       </span>
