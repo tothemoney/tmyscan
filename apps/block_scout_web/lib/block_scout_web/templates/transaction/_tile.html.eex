@@ -23,6 +23,7 @@
 
   <div class="tableEl-row-cell purpleCol data-cell-header-hide" data-cell-header="Hash">
     <%= render "_link.html", transaction_hash: @transaction.hash, data_test: "address_hash_link" %>
+
   </div>
 
   <div class="tableEl-row-cell purpleCol data-cell-header-hide" data-cell-header="Sender/Receiver">
@@ -62,8 +63,8 @@
 
       <%= if Enum.any?(remaining_token_transfers) do %>
         <div class="token-tile-view-more">
-          <%= link gettext("View More Transfers"), to: "#transaction-#{@transaction.hash}", "data-toggle": "collapse", "data-selector": "token-transfer-open", "data-test": "token_transfers_expansion" %>
-          <%= link gettext("View Less Transfers"), class: "d-none", to: "#transaction-#{@transaction.hash}", "data-toggle": "collapse", "data-selector": "token-transfer-close" %>
+          <%= link gettext("View More Transfers"), class: "purpleCol", to: "#transaction-#{@transaction.hash}", "data-toggle": "collapse", "data-selector": "token-transfer-open", "data-test": "token_transfers_expansion" %>
+          <%= link gettext("View Less Transfers"), class: "d-none purpleCol", to: "#transaction-#{@transaction.hash}", "data-toggle": "collapse", "data-selector": "token-transfer-close" %>
         </div>
       <% end %>
     <% end %>
