@@ -1,10 +1,10 @@
 <%= if @address do %>
   <%= if assigns[:show_full_hash] do %>
     <%= if name = if assigns[:ignore_implementation_name], do: primary_name(@address), else: implementation_name(@address) || primary_name(@address) do %>
-      <span><%= name %> | 
+      <span><%= "#{String.slice("#{name}",0..20)}..." %> | 
     <% end %>
     <%= link to: address_path(BlockScoutWeb.Endpoint, :show, @address), "data-test": "address_hash_link", class: "purpleCol" do %>
-      <%= @address %>
+      <%= "#{String.slice("#{@address}",0..20)}..." %>
     <% end %>
     </span>
   <% else %>
