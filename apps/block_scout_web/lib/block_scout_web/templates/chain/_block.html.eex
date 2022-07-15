@@ -36,14 +36,18 @@
             custom_classes_tooltip: ["miner-address-tooltip"] %>
     </div>
   </div>
+  <% else %>
+    <span>-</span>
   <% end %>
-  <%= if BlockScoutWeb.BlockView.show_reward?(@block.rewards) do %>
   <div
     class="tableEl-row-cell blockTimingCol headingMobileShown"
     data-cell-header="Reward"
   >
+  <%= if BlockScoutWeb.BlockView.show_reward?(@block.rewards) do %>
     <%= BlockScoutWeb.BlockView.combined_rewards_value(@block) %>
-  </div>
+  <% else %>
+    <span>-</span>
   <% end %>
+  </div>
 </div>
 

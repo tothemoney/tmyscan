@@ -798,5 +798,9 @@ input:not([type="submit"]) {
 }
 
 .address-title-fix {
-  color: #474c5f;
+  color: #474c5f !important;
+}
+
+.p-clear {
+  padding: 0;
 }
