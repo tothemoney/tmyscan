@@ -166,60 +166,37 @@
 </div>
 
 <section class="container clear-container">
-  <div class="card card-chain-blocks card-chain-blocks-fix js-ad-dependant-mb-3">
+  <div class="card card-chain-blocks-fix card-chain-blocks-fix js-ad-dependant-mb-3">
     <div class="card-body">
       <%= link(gettext("View All Blocks"), to: blocks_path(BlockScoutWeb.Endpoint, :index), class: "btnEl float-right") %>
-      <h2 class="card-title fix-card-title"><%= gettext "Blocks" %></h2>
-      <div class="row" data-selector="chain-block-list" data-url="<%= chain_blocks_path(@conn, :chain_blocks) %>">
+
+      <div class="tableEl-wrapper tableEl-wrapper-pdSm tableEl-shadows">
         <button data-selector="error-message" class="alert alert-danger col-12 text-left" style="display: none;">
           <span class="alert-link">
             <%= gettext "Something went wrong, click to reload." %>
           </span>
         </button>
-        <div hidden data-selector="loading-message" class="col-lg-3" >
-         <div data-selector="chain-block">
-           <div class="tile tile-type-block n-p d-flex flex-column">
-             <a class="tile-title"><span class="tile-loader tile-label-loader"></span> </a>
-             <div class="tile-bottom-contents">
-               <div class="dark-block-loader"></div>
-               <div class="dark-block-loader"></div>
-             </div>
-           </div>
-         </div>
+        <div class="tableEl-pre-heading d-flex align-items-center">
+          <div class="tableEl-pre-heading__title"><%= gettext "Blocks" %></div>
         </div>
-        <div hidden data-selector="loading-message" class="col-lg-3" >
-         <div data-selector="chain-block">
-           <div class="tile tile-type-block n-p d-flex flex-column">
-             <a class="tile-title"><span class="tile-loader tile-label-loader"></span> </a> 
-             <div class="tile-bottom-contents">
-               <div class="dark-block-loader"></div>
-               <div class="dark-block-loader"></div>
-             </div>
-           </div>
-         </div>
+        <div class="tableEl tableEl-header-shown-responsive tableEl-Beetween tableEl-row-between">
+          <div class="tableEl-header">
+              <div class="tableEl-header-col">№ Block</div>
+              <div class="tableEl-header-col">Type</div>
+              <div class="tableEl-header-col">Transactions</div>
+              <div class="tableEl-header-col">Size</div>
+              <div class="tableEl-header-col">Age</div>
+              <div class="tableEl-header-col">Miner</div>
+              <div class="tableEl-header-col">Reward</div>
+              <div class="tableEl-header-col">Priority Fee</div>
+              <div class="tableEl-header-col">Burnt Fees</div>
+              <div class="tableEl-header-col">Gas</div>
+          </div>
+
+          <div class="tableEl-row-wrapper" data-selector="chain-block-list" data-url="<%= chain_blocks_path(@conn, :chain_blocks) %>">
+          
+          </div>
         </div>
-        <div hidden data-selector="loading-message" class="col-lg-3" >
-         <div data-selector="chain-block">
-           <div class="tile tile-type-block n-p d-flex flex-column">
-             <a class="tile-title"><span class="tile-loader tile-label-loader"></span> </a> 
-             <div class="tile-bottom-contents">
-               <div class="dark-block-loader"></div>
-               <div class="dark-block-loader"></div>
-             </div>
-           </div>
-         </div>
-        </div>
-        <div hidden data-selector="loading-message" class="col-lg-3" >
-         <div data-selector="chain-block">
-           <div class="tile tile-type-block n-p d-flex flex-column">
-             <a class="tile-title"><span class="tile-loader tile-label-loader"></span> </a>
-             <div class="tile-bottom-contents">
-              <div class="dark-block-loader"></div>
-              <div class="dark-block-loader"></div>
-            </div>
-           </div>
-         </div>
-        </div>   
       </div>
     </div>
   </div>
@@ -235,19 +212,19 @@
           <a href="#" class="alert-link"><span data-selector="channel-batching-count"></span> <%= gettext "More transactions have come in" %></a>
         </div>
       </div>
-      <button data-selector="error-message" class="alert alert-danger col-12 text-left" style="display: none;">
+      <span data-selector="transactions-list" data-transactions-path="<%= @transactions_path %>">
+        <button data-selector="error-message" class="alert alert-danger col-12 text-left" style="display: none;">
           <span class="alert-link">
             <%= gettext "Something went wrong, click to retry." %>
           </span>
         </button>
-       
-        <!-- TRANSACTIONS BLOCKS  -->
-        <div class="tableEl-wrapper tableEl-wrapper-pdSm tableEl-shadows" data-selector="transactions-list" data-transactions-path="<%= @transactions_path %>"> 
+        <!-- TABLE BLOCKS  -->
+        <div class="tableEl-wrapper tableEl-wrapper-pdSm tableEl-shadows">
           <!-- TABLE BLOCKS HEADER  -->
           <div class="tableEl-pre-heading d-flex align-items-center">
-            
+            <div class="tableEl-pre-heading__title"></div>
           </div>
-          <!-- TABLE TRANSACTIONS HEADER  -->
+          <!-- TABLE BLOCKS HEADER  -->
           <div class="tableEl tableEl-header-shown-responsive tableEl-Beetween tableEl-row-between">
             <div class="tableEl-header">
               <div class="tableEl-header-col">Type</div>
@@ -265,6 +242,7 @@
             </div>
           </div>
         </div>
+      </span>
     </div>
   </div>
 </section>

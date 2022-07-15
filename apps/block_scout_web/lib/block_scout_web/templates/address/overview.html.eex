@@ -9,8 +9,8 @@
   <div class="secBox secBox-pdSm">
     <div class="secBox-heading">
       <div class="d-flex flex-row justify-content-between">
-        <div class="d-flex flex-column" style="/* margin-bottom: 20px; */">
-          <span><%= address_title(@address) %> <%= gettext "Details" %></span>
+        <div class="d-flex flex-column">
+          <span class="address-title-fix mb-20p"><%= address_title(@address) %> <%= gettext "Details" %></span>
           <span class="<%= if BlockScoutWeb.AddressView.contract?(@address) do %>contract-address<% end %>" data-test="address_detail_hash"><%= @address %></span>
         </div>
         <span class="overview-title-buttons float-right">
