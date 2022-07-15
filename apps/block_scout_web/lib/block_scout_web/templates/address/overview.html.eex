@@ -9,11 +9,11 @@
   <div class="secBox secBox-pdSm">
     <div class="secBox-heading">
       <div class="d-flex flex-row justify-content-between">
-          <div class="d-flex flex-column" style="/* margin-bottom: 20px; */">
-            <span><%= address_title(@address) %> <%= gettext "Details" %></span>
-            <span class="<%= if BlockScoutWeb.AddressView.contract?(@address) do %>contract-address<% end %>" data-test="address_detail_hash"><%= @address %></span>
-          </span>
-          <span class="overview-title-buttons float-right">
+        <div class="d-flex flex-column" style="/* margin-bottom: 20px; */">
+          <span><%= address_title(@address) %> <%= gettext "Details" %></span>
+          <span class="<%= if BlockScoutWeb.AddressView.contract?(@address) do %>contract-address<% end %>" data-test="address_detail_hash"><%= @address %></span>
+        </div>
+        <span class="overview-title-buttons float-right">
             <%= render BlockScoutWeb.CommonComponentsView, "_btn_copy.html",
                       id: "tx-raw-input",
                       additional_classes: ["overview-title-item"],
@@ -41,7 +41,6 @@
               </span>
             <% end %>
           </span>
-        </div>
     </div>
     <div class="secBox-list">
       <% address_name = primary_name(@address) %>
