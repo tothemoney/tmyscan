@@ -49,7 +49,7 @@
           <span href="#" class="alert-link"><%= gettext("Something went wrong, click to reload.") %></span>
         </button>
 
-        <div data-empty-response-message style="display: none;">
+        <div data-empty-response-message style="display: none;" class="mb-20p">
           <div class="tile tile-muted text-center" data-selector="empty-transactions-list">
             <%= gettext "There are no transactions for this address." %>
           </div>
