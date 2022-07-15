@@ -182,15 +182,12 @@
         <div class="tableEl tableEl-header-shown-responsive tableEl-Beetween tableEl-row-between">
           <div class="tableEl-header">
               <div class="tableEl-header-col">№ Block</div>
-              <div class="tableEl-header-col">Type</div>
               <div class="tableEl-header-col">Transactions</div>
-              <div class="tableEl-header-col">Size</div>
               <div class="tableEl-header-col">Age</div>
+              <%= if System.get_env("HIDE_BLOCK_MINER") !== "true" do %>
               <div class="tableEl-header-col">Miner</div>
+              <% end %>
               <div class="tableEl-header-col">Reward</div>
-              <div class="tableEl-header-col">Priority Fee</div>
-              <div class="tableEl-header-col">Burnt Fees</div>
-              <div class="tableEl-header-col">Gas</div>
           </div>
 
           <div class="tableEl-row-wrapper" data-selector="chain-block-list" data-url="<%= chain_blocks_path(@conn, :chain_blocks) %>">
