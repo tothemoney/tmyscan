@@ -170,8 +170,7 @@
             </span>
           </div>
         </div>
-        <!--
-          <div class="secBox-list__item">
+        <div class="secBox-list__item">
           <div class="secBox-list__item-label">
             <%= gettext("Transactions") %>
           </div>
@@ -197,7 +196,6 @@
             </span>
           </div>
         </div>
-        -->
         <div class="secBox-list__item">
           <div class="secBox-list__item-label">
             <%= gettext("Transfers") %>
@@ -257,8 +255,7 @@
         </div>
         <% end %>
         <div data-last-balance-update="<%= @address.fetched_coin_balance_block_number %>"></div>
-        <!--
-          <div class="secBox-list__item">
+        <div class="secBox-list__item">
           <div class="secBox-list__item-label">
             <%= gettext("Blocks Validated") %>
           </div>
@@ -269,7 +266,6 @@
             </span>
           </div>
         </div>
-        -->
     </div>
   <div>
 
