@@ -1,10 +1,11 @@
-<section class="container">
+<section class="container clear-container">
 
   <%= render BlockScoutWeb.BlockView, "overview.html", assigns %>
 
   <section>
-    <div class="card mb-3">
-      <div class="card-tabs js-card-tabs">
+    <div class="tableEl-wrapper tableEl-wrapper-pdSm tableEl-shadows">
+      <div class="tableEl-pre-heading d-flex align-items-center">
+      <div class="tableEl-pre-heading__title">
         <%=
           link(
             gettext("Transactions"),
@@ -13,28 +14,31 @@
             )
         %>
       </div>
-
-      <div class="card-body" data-async-load data-async-listing="<%= @current_path %>" id="txs">
-
-      <%= render BlockScoutWeb.CommonComponentsView, "_pagination_container.html", position: "top", show_pagination_limit: true, data_next_page_button: true, data_prev_page_button: true %>
-
+      <div class="tableEl tableElRowBlocks tableEl-Beetween tableEl-row-between" data-async-load data-async-listing="<%= @current_path %>" id="txs">
+        <div class="tableEl-header">
+          <div class="tableEl-header-col">Type</div>
+          <div class="tableEl-header-col">Status</div>
+          <div class="tableEl-header-col">Hash</div>
+          <div class="tableEl-header-col">Sender/Receiver</div>
+          <div class="tableEl-header-col">Amount</div>
+          <div class="tableEl-header-col">Transfer</div>
+          <div class="tableEl-header-col">№ Block</div>
+          <div class="tableEl-header-col">Age</div>
+        </div>
         <button data-error-message class="alert alert-danger col-12 text-left" style="display: none;">
           <span href="#" class="alert-link"><%= gettext("Something went wrong, click to reload.") %></span>
         </button>
-
         <div data-empty-response-message style="display: none;">
           <div class="tile tile-muted text-center" data-selector="empty-transactions-list">
             <%= gettext "There are no transactions for this block." %>
           </div>
         </div>
-
-        <div data-items>
+        <div class="tableEl-row-wrapper" data-items>
           <%= render BlockScoutWeb.CommonComponentsView, "_tile-loader.html" %>
         </div>
-
-        <%= render BlockScoutWeb.CommonComponentsView, "_pagination_container.html", position: "bottom", cur_page_number: "1", show_pagination_limit: true, data_next_page_button: true, data_prev_page_button: true %>
-
+      </div>
     </div>
+    
     <script defer data-cfasync="false" src="<%= static_path(@conn, "/js/async-listing-load.js") %>"></script>
     <script defer data-cfasync="false" src="<%= static_path(@conn, "/js/token-transfers-toggle.js") %>"></script>
   </section>

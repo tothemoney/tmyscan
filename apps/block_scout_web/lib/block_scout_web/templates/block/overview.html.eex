@@ -4,9 +4,7 @@
   <%= render BlockScoutWeb.Advertisement.TextAdView, "index.html", conn: @conn %>
   <div class="secBox secBox-pdSm">
     <div class="secBox-heading">Block <span>#<%= @block.number %></span></div>
-  </div>
-
-  <div class="secBox-list">
+    <div class="secBox-list">
     <!--Block Height-->
     <div class="secBox-list__item">
       <div class="secBox-list__item-label">
@@ -219,6 +217,7 @@
         </div>
       <% end %>
     <% end %>
+  </div>
   </div>
 </section>
 
