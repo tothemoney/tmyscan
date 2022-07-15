@@ -786,6 +786,10 @@ input:not([type="submit"]) {
   margin-bottom: 20px;
 }
 
+.w-150p {
+  width: 150px;
+}
+
 .btn-copy-icon.btn-copy-icon-small.btn-copy-icon-custom {
   position: unset !important;
 }
@@ -802,5 +806,6 @@ input:not([type="submit"]) {
 }
 
 .p-clear {
-  padding: 0;
+  padding-left: 0 !important;
+  padding-right: 12px !important;
 }
