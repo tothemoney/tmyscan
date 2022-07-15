@@ -2,6 +2,13 @@
   <%= render BlockScoutWeb.Advertisement.TextAdView, "index.html", conn: @conn %>
   <div data-async-listing="<%= @current_path %>">
       <%= render BlockScoutWeb.CommonComponentsView, "_channel_disconnected_message.html", text: gettext("Connection Lost, click to load newer blocks") %>
+      <div data-empty-response-message style="display: none;" class="mb-20p">
+        <div class="tile tile-muted text-center">
+        <span data-selector="empty-internal-transactions-list">
+          <%= gettext "There are no blocks." %>
+        </span>
+      </div>
+    </div>
 
       <!-- TABLE BLOCKS  -->
       <div class="tableEl-wrapper tableEl-wrapper-pdSm tableEl-shadows">
@@ -14,14 +21,18 @@
         <div class="tableEl tableEl-header-shown-responsive tableEl-Beetween tableEl-row-between">
           <div class="tableEl-header">
               <div class="tableEl-header-col">№ Block</div>
-              <div class="tableEl-header-col onlydesktop">Transactions</div>
-              <div class="tableEl-header-col">Block size</div>
-              <div class="tableEl-header-col onlydesktop">Age</div>
-              <div class="tableEl-header-col onlydesktop">Miner/Reward</div>
-              <div class="tableEl-header-col onlydesktop">Priority Fee</div>
+              <div class="tableEl-header-col">Type</div>
+              <div class="tableEl-header-col">Transactions</div>
+              <div class="tableEl-header-col">Size</div>
+              <div class="tableEl-header-col">Age</div>
+              <div class="tableEl-header-col">Miner</div>
+              <div class="tableEl-header-col">Reward</div>
+              <div class="tableEl-header-col">Priority Fee</div>
               <div class="tableEl-header-col">Burnt Fees</div>
-              <div class="tableEl-header-col">Gas Limit</div>
-              <div class="tableEl-header-col">Gas Used</div>
+              <div class="tableEl-header-col">Gas</div>
+
+
+              
           </div>
           
           <div class="tableEl-row-wrapper" data-items>
@@ -29,11 +40,6 @@
           </div>
         </div>
 
-      </div>
-
-      
-      <div data-empty-response-message style="display: none;">
-          <span><%= gettext "There are no blocks." %></span>
       </div>
 
     </div>

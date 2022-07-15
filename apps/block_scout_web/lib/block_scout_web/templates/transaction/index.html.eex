@@ -7,7 +7,7 @@
 </script>
 <section class="container clear-container" data-page="transaction-list">
   <%= render BlockScoutWeb.Advertisement.TextAdView, "index.html", conn: @conn %>
-  <div class="card card-chain-blocks-fix" data-async-listing="<%= @current_path %>">
+  <div data-async-listing="<%= @current_path %>">
     <div data-selector="channel-batching-message" class="d-none">
       <div data-selector="reload-button" class="alert alert-info">
         <a href="#" class="alert-link"><span data-selector="channel-batching-count"></span> <%= gettext "More transactions have come in" %></a>
@@ -17,13 +17,14 @@
     <button data-error-message class="alert alert-danger col-12 text-left" style="display: none;">
       <span href="#" class="alert-link"><%= gettext("Something went wrong, click to reload.") %></span>
     </button>
-    <div data-empty-response-message style="display: none;">
+    <div data-empty-response-message style="display: none;" class="mb-20p">
       <div class="tile tile-muted text-center">
         <span data-selector="empty-internal-transactions-list">
           <%= gettext "There are no transactions." %>
         </span>
       </div>
     </div>
+    
     <!-- TABLE BLOCKS  -->
     <div class="tableEl-wrapper tableEl-wrapper-pdSm tableEl-shadows">
       <!-- TABLE BLOCKS HEADER  -->
