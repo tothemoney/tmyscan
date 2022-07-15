@@ -10,8 +10,6 @@
     <!--Block Height-->
     <div class="secBox-list__item">
       <div class="secBox-list__item-label">
-        <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-          text: gettext("The block height of a particular block is defined as the number of blocks preceding it in the blockchain.") %>
           <%= if block_type(@block) == "Block" do %>
             <%= gettext("Block Height") %>
           <% else %>
@@ -32,8 +30,6 @@
     <!--Timestamp-->
     <div class="secBox-list__item">
       <div class="secBox-list__item-label">
-        <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-          text: gettext("Date & time at which block was produced.") %>
         <%= gettext("Timestamp") %>
       </div>
       <div class="secBox-list__item-txt">
@@ -44,8 +40,6 @@
     <!--Transactions-->
     <div class="secBox-list__item">
       <div class="secBox-list__item-label">
-        <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-          text: gettext("The number of transactions in the block.") %>
         <%= gettext("Transactions") %>
       </div>
       <div class="secBox-list__item-txt">
@@ -63,8 +57,6 @@
     <%= if System.get_env("HIDE_BLOCK_MINER") !== "true" do %>
     <div class="secBox-list__item">
       <div class="secBox-list__item-label">
-        <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-          text: gettext("A block producer who successfully included the block onto the blockchain.") %>
         <%= gettext("Miner") %>
       </div>
       <div class="secBox-list__item-txt">
@@ -81,8 +73,6 @@
     <!--Size-->
     <div class="secBox-list__item">
       <div class="secBox-list__item-label">
-        <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-          text: gettext("Size of the block in bytes.") %>
         <%= gettext("Size") %>
       </div>
       <div class="secBox-list__item-txt">
@@ -93,8 +83,6 @@
     <!--Hash-->
     <div class="secBox-list__item">
       <div class="secBox-list__item-label">
-        <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-          text: gettext("The SHA256 hash of the block.") %>
         <%= gettext("Hash") %>
       </div>
       <div class="secBox-list__item-txt">
@@ -111,8 +99,6 @@
     <%= unless @block.number == 0 do %>
     <div class="secBox-list__item">
       <div class="secBox-list__item-label">
-        <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-          text: gettext("The hash of the block from which this block was generated.") %>
         <%= gettext("Parent Hash") %>
       </div>
       <div class="secBox-list__item-txt">
@@ -129,8 +115,6 @@
     <!--Difficulty-->
     <div class="secBox-list__item">
       <div class="secBox-list__item-label">
-        <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-          text: gettext("Block difficulty for miner, used to calibrate block generation time (Note: constant in POA based networks).") %>
         <%= gettext("Difficulty") %>
       </div>
       <div class="secBox-list__item-txt">
@@ -142,8 +126,6 @@
     <%= if block_type(@block) == "Block" do %>
     <div class="secBox-list__item">
       <div class="secBox-list__item-label">
-        <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-          text: gettext("Total difficulty of the chain until this block.") %>
         <%= gettext("Total Difficulty") %>
       </div>
       <div class="secBox-list__item-txt">
@@ -152,8 +134,6 @@
     </div>
     <div class="secBox-list__item">
       <div class="secBox-list__item-label">
-        <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-          text: gettext("The total gas amount used in the block and its percentage of gas filled in the block.") %>
         <%= gettext("Gas Used") %>
       </div>
       <div class="secBox-list__item-txt">
@@ -162,8 +142,6 @@
     </div>
     <div class="secBox-list__item">
       <div class="secBox-list__item-label">
-        <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-          text: gettext("Total gas limit provided by all transactions in the block.") %>
         <%= gettext("Gas Limit") %>
       </div>
       <div class="secBox-list__item-txt">
@@ -172,8 +150,6 @@
     </div>
     <div class="secBox-list__item">
       <div class="secBox-list__item-label">
-        <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-          text: gettext("64-bit hash of value verifying proof-of-work (note: null for POA chains).") %>
         <%= gettext("Nonce") %>
       </div>
       <div class="secBox-list__item-txt">
@@ -184,8 +160,6 @@
     <%= if !is_nil(@block.base_fee_per_gas) do%>
       <div class="secBox-list__item">
         <div class="secBox-list__item-label">
-          <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-            text: gettext("Minimum fee required per unit of gas. Fee adjusts based on network congestion.") %>
           <%= gettext("Base Fee per Gas") %>
         </div>
         <div class="secBox-list__item-txt">
@@ -194,8 +168,6 @@
       </div>
       <div class="secBox-list__item">
         <div class="secBox-list__item-label">
-          <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-            text: gettext("Ether") <> " " <> gettext("burned from transactions included in the block (Base fee (per unit of gas) * Gas Used).") %>
           <%= gettext("Burnt Fees") %>
         </div>
         <div class="secBox-list__item-txt">
@@ -204,8 +176,6 @@
       </div>
       <div class="secBox-list__item">
         <div class="secBox-list__item-label">
-          <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-            text: gettext("User-defined tips sent to validator for transaction priority/inclusion.") %>
           <%= gettext("Priority Fee / Tip") %>
         </div>
         <div class="secBox-list__item-txt">
@@ -217,8 +187,6 @@
       <%= for block_reward <- @block.rewards do %>
         <div class="secBox-list__item">
           <div class="secBox-list__item-label">
-            <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-              text: gettext("Amount of distributed reward. Miners receive a static block reward + Tx fees + uncle fees.") %>
             <%= block_reward_text(block_reward, @block.miner.hash) %>
           </div>
           <div class="secBox-list__item-txt">
@@ -231,8 +199,6 @@
       <%= if length(@block.uncle_relations) > 0 do %>
         <div class="secBox-list__item">
           <div class="secBox-list__item-label">
-            <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-              text: gettext("Index position(s) of referenced stale blocks.") %>
             <%= gettext("Uncles") %>
           </div>
           <div class="secBox-list__item-txt">
