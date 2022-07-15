@@ -21,16 +21,16 @@ defmodule BlockScoutWeb.TabHelpers do
   """
   def tab_status(tab_name, request_path, show_token_transfers \\ false) do
     if tab_active?(tab_name, request_path) do
-      "active"
+      "active card-tab-active-fix"
     else
       case request_path do
         "/tx/" <> "0x" <> <<_tx_hash::binary-size(64)>> ->
           cond do
             tab_name == "token-transfers" && show_token_transfers ->
-              "active"
+              "active card-tab-active-fix"
 
             tab_name == "internal-transactions" && !show_token_transfers ->
-              "active"
+              "active card-tab-active-fix"
 
             true ->
               nil
