@@ -786,3 +786,6 @@ input:not([type="submit"]) {
   margin-bottom: 20px;
 }
 
+.btn-copy-icon.btn-copy-icon-small.btn-copy-icon-custom {
+  position: unset !important;
+}
