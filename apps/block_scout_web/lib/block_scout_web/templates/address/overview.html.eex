@@ -5,75 +5,55 @@
   <% circles_addresses_list = CustomContractsHelpers.get_custom_addresses_list(:circles_addresses) %>
   <% current_address = "0x" <> Base.encode16(@address.hash.bytes, case: :lower) %>
   <% created_from_address_hash = if from_address_hash(@address), do: "0x" <> Base.encode16(from_address_hash(@address).bytes, case: :lower), else: nil %>
-  <div class="row js-ad-dependant-mb-2 js-ad-dependant-mb-5-reverse">
-    <!-- Address details -->
-    <div class="col-md-12 js-ad-dependant-mb-2">
-      <div class="card js-ad-dependant-mb-2">
-        <div class="card-body fs-14" style="line-height: 31px;">
-          <%= cond do %>
-            <% Enum.member?(dark_forest_addresses_list_0_4, current_address) -> %>
-              <%= render BlockScoutWeb.AddressView, "_custom_view_df_title.html", title: "zkSnark space warfare (v0.4)" %>
-            <% Enum.member?(dark_forest_addresses_list_0_5, current_address) -> %>
-              <%= render BlockScoutWeb.AddressView, "_custom_view_df_title.html", title: "zkSnark space warfare (v0.5)" %>
-            <% Enum.member?(circles_addresses_list, current_address) -> %>
-              <div class="custom-dapp-header-container">
-                <img class="custom-address-icon"/>
-              </div>
-            <% Enum.member?(circles_addresses_list, created_from_address_hash) -> %>
-              <div class="custom-dapp-header-container">
-                <img class="custom-address-icon"/>
-              </div>
-            <% true -> %>
-              <%= nil %>
-          <% end %>
-          <h1 class="card-title lg-card-title mb-2-desktop">
-            <div class="title-with-label"><%= address_title(@address) %> <%= gettext "Details" %></div>
-            <!-- buttons -->
-            <span class="overview-title-buttons float-right">
-              <%= render BlockScoutWeb.CommonComponentsView, "_btn_copy.html",
+  
+  <div class="secBox secBox-pdSm">
+    <div class="secBox-heading">
+      <div class="d-flex flex-row justify-content-between">
+          <div class="d-flex flex-column" style="/* margin-bottom: 20px; */">
+            <span><%= address_title(@address) %> <%= gettext "Details" %></span>
+            <span class="<%= if BlockScoutWeb.AddressView.contract?(@address) do %>contract-address<% end %>" data-test="address_detail_hash"><%= @address %></span>
+          </span>
+          <span class="overview-title-buttons float-right">
+            <%= render BlockScoutWeb.CommonComponentsView, "_btn_copy.html",
                       id: "tx-raw-input",
                       additional_classes: ["overview-title-item"],
                       clipboard_text: @address,
                       aria_label: gettext("Copy Address"),
                       title: gettext("Copy Address") %>
-              <%= render BlockScoutWeb.CommonComponentsView, "_btn_qr_code.html" %>
-              <%= if validator_metadata = primary_validator_metadata(@address) do %>
+            <%= render BlockScoutWeb.CommonComponentsView, "_btn_qr_code.html" %>
+            <%= if validator_metadata = primary_validator_metadata(@address) do %>
+              <span
+                class="overview-title-item"
+                data-target="#validatorModal"
+                data-toggle="modal"
+              >
                 <span
-                  class="overview-title-item"
-                  data-target="#validatorModal"
-                  data-toggle="modal"
+                  aria-label='<%= gettext("Show Validator Info") %>'
+                  class="btn-address-card-icon"
+                  data-placement="top"
+                  data-toggle="tooltip"
+                  title='<%= gettext("Validator Info") %>'
                 >
-                  <span
-                    aria-label='<%= gettext("Show Validator Info") %>'
-                    class="btn-address-card-icon"
-                    data-placement="top"
-                    data-toggle="tooltip"
-                    title='<%= gettext("Validator Info") %>'
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="10">
-                      <path fill-rule="evenodd" d="M19 6h-6a1 1 0 0 1 0-2h6a1 1 0 0 1 0 2zm0-4h-6a1 1 0 0 1 0-2h6a1 1 0 0 1 0 2zM9 10H1a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2h.184A2.962 2.962 0 0 1 2 4V3a3 3 0 1 1 6 0v1c0 .353-.072.686-.184 1H8a2 2 0 0 1 2 2v2a1 1 0 0 1-1 1zM6 3a1 1 0 0 0-2 0v1a1 1 0 0 0 2 0V3zm2 4H2v1h6V7zm5 1h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2z"/>
-                    </svg>
-                  </span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="10">
+                    <path fill-rule="evenodd" d="M19 6h-6a1 1 0 0 1 0-2h6a1 1 0 0 1 0 2zm0-4h-6a1 1 0 0 1 0-2h6a1 1 0 0 1 0 2zM9 10H1a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2h.184A2.962 2.962 0 0 1 2 4V3a3 3 0 1 1 6 0v1c0 .353-.072.686-.184 1H8a2 2 0 0 1 2 2v2a1 1 0 0 1-1 1zM6 3a1 1 0 0 0-2 0v1a1 1 0 0 0 2 0V3zm2 4H2v1h6V7zm5 1h6a1 1 0 0 1 0 2h-6a1 1 0 0 1 0-2z"/>
+                  </svg>
                 </span>
-              <% end %>
-            </span>
-          </h1>
-          <h3 class="address-detail-hash-title mb-4 <%= if BlockScoutWeb.AddressView.contract?(@address) do %>contract-address<% end %>" data-test="address_detail_hash"><%= @address %></h3>
-          <!-- Verify in other explorers -->
-          <!--
-          <%# <%= render "_verify_other_explorers.html", hash: @address.hash, type: "address" %> %>
-          -->
-          <% address_name = primary_name(@address) %>
-          <%= cond do %>
-            <% @address.token -> %>
-              <dl class="row">
-                <dt class="col-sm-4 col-md-4 col-lg-3 text-muted">
-                  <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-                  text: gettext("Token name and symbol.") %>
-                  <%= gettext("Token") %>
-                </dt>
-                <dd class="col-sm-8 col-md-8 col-lg-9" data-test="address_token">
-                  <%= link(
+              </span>
+            <% end %>
+          </span>
+        </div>
+    </div>
+    <div class="secBox-list">
+      <% address_name = primary_name(@address) %>
+      <%= cond do %>
+        <% @address.token -> %>
+        <div class="secBox-list__item">
+          <div class="secBox-list__item-label">
+            <%= gettext("Token") %>
+          </div>
+          <div class="secBox-list__item-txt">
+              <span data-test="address_token">
+                <%= link(
                     token_title(@address.token),
                     to: token_path(@conn,
                     :show,
@@ -82,45 +62,44 @@
                     "token_hash_link"
                   ) 
                   %>
-                </dd>
-              </dl>
-            <% address_name -> %>
-              <%= if contract?(@address) do %>
-                <dl class="row">
-                  <dt class="col-sm-4 col-md-4 col-lg-3 text-muted">
-                    <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-                    text: gettext("The name found in the source code of the Contract.") %>
-                    <%= gettext("Contract Name") %>
-                  </dt>
-                  <dd class="col-sm-8 col-md-8 col-lg-9" data-test="address_contract">
-                    <%= short_contract_name(address_name, 30) %>
-                  </dd>
-                </dl>
-              <% else %>
-                <dl class="row">
-                  <dt class="col-sm-4 col-md-4 col-lg-3 text-muted">
-                    <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-                    text: gettext("The name of the validator.") %>
-                    <%= gettext("Validator Name") %>
-                  </dt>
-                  <dd class="col-sm-8 col-md-8 col-lg-9" data-test="address_contract">
-                    <%= short_contract_name(address_name, 30) %>
-                  </dd>
-                </dl>
-              <% end %>
-            <% true -> %>
-          <% end %>
-          <!-- Creator -->
-          <% from_address_hash = from_address_hash(@address) %>
+              </span>
+          </div>
+        </div>
+        <% address_name -> %>
           <%= if contract?(@address) do %>
-            <dl class="row">
-              <dt class="col-sm-4 col-md-4 col-lg-3 text-muted">
-                <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-                text: gettext("Transactions and address of creation.") %>
-                <%= gettext("Creator") %>
-              </dt>
-              <dd class="col-sm-8 col-md-8 col-lg-9" data-test="address_contract_creator">
-                <%= if from_address_hash do %>
+            <div class="secBox-list__item">
+              <div class="secBox-list__item-label">
+                <%= gettext("Contract Name") %>  
+              </div>
+              <div class="secBox-list__item-txt">
+                  <span data-test="address_contract">
+                    <%= short_contract_name(address_name, 30) %>
+                  </span>
+              </div>
+            </div>
+          <% else %>
+          <div class="secBox-list__item">
+            <div class="secBox-list__item-label">
+              <%= gettext("Validator Name") %>
+            </div>
+            <div class="secBox-list__item-txt">
+                <span data-test="address_contract">
+                  <%= short_contract_name(address_name, 30) %>
+                </span>
+            </div>
+          </div>
+          <% end %>
+          <% true -> %>
+        <% end %>
+        <% from_address_hash = from_address_hash(@address) %>
+        <%= if contract?(@address) do %>
+        <div class="secBox-list__item">
+          <div class="secBox-list__item-label">
+            <%= gettext("Creator") %>
+          </div>
+          <div class="secBox-list__item-txt">
+            <span data-test="address_contract_creator">
+              <%= if from_address_hash do %>
                   <%= link(
                     trimmed_hash(from_address_hash(@address)),
                     to: address_path(@conn, :show, from_address_hash(@address))
@@ -132,42 +111,38 @@
                     trimmed_hash(transaction_hash(@address)),
                     to: transaction_path(@conn, :show, transaction_hash(@address)),
                     "data-test": "transaction_hash_link"
-                  ) %>
-                <% else %>
-                  <p class="alert alert-danger" role="alert"><%= gettext("Error: Could not determine contract creator.") %></p>
-                <% end %>
-              </dd>
-            </dl>
-          <% end %>
-          <!-- Implementation -->
-          <%= if @is_proxy do %>
-            <% {implementation_address, name} = Chain.get_implementation_address_hash(@address.hash, @address.smart_contract.abi) || "0x0000000000000000000000000000000000000000" %>
-            <%= if implementation_address do %>
-              <dl class="row">
-                <dt class="col-sm-4 col-md-4 col-lg-3 text-muted">
-                  <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-                  text: gettext("Implementation address of the proxy contract.") %>
-                  <%= gettext("Implementation") %>
-                </dt>
-                <dd class="col-sm-8 col-md-8 col-lg-9" data-test="address_contract_implementation">
-                  <%= link(
-                    (if name, do: name <> " | " <> implementation_address, else: implementation_address),
-                    to: address_path(@conn, :show, implementation_address),
-                    class: "contract-address"
-                  ) 
-                  %>
-                </dd>
-              </dl>
-            <% end %>
-          <% end %>
-          <!-- Balance -->
-          <dl class="row">
-            <dt class="col-sm-4 col-md-4 col-lg-3 text-muted">
-              <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-              text: gettext("Address balance in") <> " " <> Explorer.coin_name() <> " " <> gettext("doesn't include ERC20, ERC721, ERC1155 tokens).") %>
-              <%= gettext("Balance") %>
-            </dt>
-            <dd data-selector="current-coin-balance" class="col-sm-8 col-md-8 col-lg-9" data-test="address_balance">
+              ) %>
+              <% else %>
+                <p class="alert alert-danger" role="alert"><%= gettext("Error: Could not determine contract creator.") %></p>
+              <% end %>
+            </span>
+          </div>
+        </div>
+        <% end %>
+        <%= if @is_proxy do %>
+        <% {implementation_address, name} = Chain.get_implementation_address_hash(@address.hash, @address.smart_contract.abi) || "0x0000000000000000000000000000000000000000" %>
+        <div class="secBox-list__item">
+          <div class="secBox-list__item-label">
+            <%= gettext("Implementation") %>
+          </div>
+          <div class="secBox-list__item-txt">
+            <span data-test="address_contract_implementation">
+              <%= link(
+                  (if name, do: name <> " | " <> implementation_address, else: implementation_address),
+                  to: address_path(@conn, :show, implementation_address),
+                  class: "contract-address"
+                ) 
+                %>
+            </span>
+          </div>
+        </div>
+        <% end %>
+        <div class="secBox-list__item">
+          <div class="secBox-list__item-label">
+            <%= gettext("Balance") %>
+          </div>
+          <div class="secBox-list__item-txt">
+            <span data-test="address_balance">
               <%= balance(@address) %>
               <%= if !match?({:pending, _}, @coin_balance_status) && !empty_exchange_rate?(@exchange_rate) do %>
                 <% usd_value = to_string(@exchange_rate.usd_value) %>
@@ -183,27 +158,25 @@
                   </span>)
                 </span>
               <% end %>
-            </dd>
-          </dl>
-          <!-- Tokens -->
-          <dl class="row" data-test="outside_of_dropdown">
-            <dt class="col-sm-4 col-md-4 col-lg-3 text-muted">
-              <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-              text: gettext("All tokens in the account and total value.") %>
-              <%= gettext("Tokens") %>
-            </dt>
-            <dd class="col-sm-8 col-md-8 col-lg-9" data-test="address_tokens" data-selector="balance-card">
+            </span>
+          </div>
+        </div>
+        <div class="secBox-list__item">
+          <div class="secBox-list__item-label">
+            <%= gettext("Tokens") %>
+          </div>
+          <div class="secBox-list__item-txt">
+            <span data-test="address_tokens" data-selector="balance-card">
               <%= render BlockScoutWeb.AddressView, "_balance_dropdown.html", conn: @conn, address: @address %>
-            </dd>
-          </dl>
-          <!-- Transaction count -->
-          <dl class="row address-transactions-count-item">
-            <dt class="col-sm-4 col-md-4 col-lg-3 text-muted">
-              <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-              text: gettext("Number of transactions related to this address.") %>
-              <%= gettext("Transactions") %>
-            </dt>
-            <dd class="col-sm-8 col-md-8 col-lg-9" data-test="address_transaction_count">
+            </span>
+          </div>
+        </div>
+        <div class="secBox-list__item">
+          <div class="secBox-list__item-label">
+            <%= gettext("Transactions") %>
+          </div>
+          <div class="secBox-list__item-txt">
+            <span data-test="address_transaction_count">
               <%= if @conn.request_path |> String.contains?("/transactions") do %>
                 <a href="#txs" class="page-link bs-label large btn-no-border-link-to-tems" data-selector="transaction-count">
                   <%= if @address.transactions_count do %>
@@ -221,16 +194,15 @@
                   <% end %>
                 </a>
               <% end %>
-            </dd>
-          </dl>
-          <!-- Transfers count -->
-          <dl class="row address-transfers-count-item">
-            <dt class="col-sm-4 col-md-4 col-lg-3 text-muted">
-              <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-              text: gettext("Number of transfers to/from this address.") %>
-              <%= gettext("Transfers") %>
-            </dt>
-            <dd class="col-sm-8 col-md-8 col-lg-9" data-test="address_transfer_count">
+            </span>
+          </div>
+        </div>
+        <div class="secBox-list__item">
+          <div class="secBox-list__item-label">
+            <%= gettext("Transfers") %>
+          </div>
+          <div class="secBox-list__item-txt">
+            <span data-test="address_transfer_count">
               <%= if @conn.request_path |> String.contains?("/token-transfers") do %>
                 <a href="#transfers" class="page-link bs-label large btn-no-border-link-to-tems" data-selector="transfer-count">
                   <%= if @address.token_transfers_count do %>
@@ -248,16 +220,15 @@
                   <% end %>
                 </a>
               <% end %>
-            </dd>
-          </dl>
-          <!-- Gas used -->
-          <dl class="row address-gas-used-item">
-            <dt class="col-sm-4 col-md-4 col-lg-3 text-muted">
-              <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-              text: gettext("Gas used by the address.") %>
-              <%= gettext("Gas Used") %>
-            </dt>
-            <dd class="col-sm-8 col-md-8 col-lg-9" data-test="address_gas_used">
+            </div>
+          </div>
+        </div>
+        <div class="secBox-list__item">
+          <div class="secBox-list__item-label">
+            <%= gettext("Gas Used") %>
+          </div>
+          <div class="secBox-list__item-txt">
+            <span data-test="address_gas_used">
               <span data-selector="gas-usage-count">
                 <%= if @address.gas_used do %>
                   <%= Number.Delimit.number_to_delimited(@address.gas_used, precision: 0) %>
@@ -265,42 +236,40 @@
                   <%= render BlockScoutWeb.CommonComponentsView, "_loading_spinner.html", loading_text: gettext("Fetching gas used...") %>
                 <% end %>
               </span>
-            </dd>
-          </dl>
-          <!-- Last balance update -->
-          <%= if @address.fetched_coin_balance_block_number do %>
-            <dl class="row">
-              <dt class="col-sm-4 col-md-4 col-lg-3 text-muted">
-                <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-                text: gettext("Block number in which the address was updated.") %>
-                <%= gettext("Last Balance Update") %>
-              </dt>
-              <dd data-selector="last-balance-update" class="col-sm-8 col-md-8 col-lg-9" data-test="address_last_balance_update">
-                <%= link(
+            </span>
+          </div>
+        </div>
+        <%= if @address.fetched_coin_balance_block_number do %>
+        <div class="secBox-list__item">
+          <div class="secBox-list__item-label">
+            <%= gettext("Last Balance Update") %>
+          </div>
+          <div class="secBox-list__item-txt">
+            <span data-selector="last-balance-update" data-test="address_last_balance_update">
+              <%= link(
                     @address.fetched_coin_balance_block_number,
                     to: block_path(@conn, :show, @address.fetched_coin_balance_block_number),
                     class: "tile-title-lg"
                 ) %>
-              </dd>
-            </dl>
-          <% end %>
-          <div data-last-balance-update="<%= @address.fetched_coin_balance_block_number %>"></div>
-          <!-- Blocks Validated -->
-          <dl class="row address-validation-count-item" style="display: none;">
-            <dt class="col-sm-4 col-md-4 col-lg-3 text-muted">
-              <%= render BlockScoutWeb.CommonComponentsView, "_i_tooltip_2.html",
-              text: gettext("Number of blocks validated by this validator.") %>
-              <%= gettext("Blocks Validated") %>
-            </dt>
-            <dd class="col-sm-8 col-md-8 col-lg-9" data-test="address_blocks_validated">
-              <span data-selector="validation-count">
-              </span>
-            </dd>
-          </dl>
+            </span>
+          </div>
         </div>
-      </div>
+        <% end %>
+        <div data-last-balance-update="<%= @address.fetched_coin_balance_block_number %>"></div>
+        <div class="secBox-list__item">
+          <div class="secBox-list__item-label">
+            <%= gettext("Blocks Validated") %>
+          </div>
+          <div class="secBox-list__item-txt">
+            <span data-test="address_blocks_validated">
+               <span data-selector="validation-count">
+              </span>
+            </span>
+          </div>
+        </div>
     </div>
-  </div>
+  <div>
+
 </section>
 
 <!-- Modal QR -->
@@ -312,3 +281,4 @@
 <% end %>
 
 <%= render BlockScoutWeb.Advertisement.BannersAdView, "_banner_728.html", conn: @conn %> 
+
