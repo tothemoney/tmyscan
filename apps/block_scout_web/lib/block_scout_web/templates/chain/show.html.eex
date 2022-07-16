@@ -184,8 +184,8 @@
           <div class="tableEl-header">
               <div class="tableEl-header-col">№ Block</div>
               <div class="tableEl-header-col">Transactions</div>
-              <div class="tableEl-header-col js-ad-dependant-mb-3">Age</div>
-              <div class="tableEl-header-col js-ad-dependant-mb-3">Miner</div>
+              <div class="tableEl-header-col onlydesktop">Age</div>
+              <div class="tableEl-header-col onlydesktop">Miner</div>
               <div class="tableEl-header-col">Reward</div>
           </div>
           <!-- MARK: FIX Block Mined, awaiting import... -->
@@ -217,14 +217,14 @@
 
         <div class="tableEl tableEl-header-shown-responsive tableEl-Beetween tableEl-row-between">
           <div class="tableEl-header">
-            <div class="tableEl-header-col">Type</div>
-            <div class="tableEl-header-col">Status</div>
+            <div class="tableEl-header-col onlydesktop">Type</div>
+            <div class="tableEl-header-col onlydesktop">Status</div>
             <div class="tableEl-header-col">Hash</div>
             <div class="tableEl-header-col">Sender/Receiver</div>
             <div class="tableEl-header-col">Amount</div>
-            <div class="tableEl-header-col">Transfer</div>
-            <div class="tableEl-header-col">№ Block</div>
-            <div class="tableEl-header-col">Age</div>
+            <div class="tableEl-header-col onlydesktop">Transfer</div>
+            <div class="tableEl-header-col onlydesktop">№ Block</div>
+            <div class="tableEl-header-col onlydesktop">Age</div>
           </div>
 
           <button data-selector="error-message" class="alert alert-danger col-12 text-left" style="display: none;">

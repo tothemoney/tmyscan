@@ -1,6 +1,6 @@
 <div class="tableEl-row fade-up-blocks-chain" data-selector="chain-block" data-block-number="<%= @block.number %>">
   <div
-    class="tableEl-row-cell blockTimingCol w-150p"
+    class="tableEl-row-cell blockTimingCol"
     data-cell-header="№ Block"
   >
     <%= link(
@@ -11,20 +11,20 @@
         ) %>
   </div>
   <div
-    class="tableEl-row-cell blockTimingCol headingMobileShown w-150p"
+    class="tableEl-row-cell blockTimingCol headingMobileShown"
     data-cell-header="Transactions"
   >
     <%= gettext("%{count}", count: Enum.count(@block.transactions)) %>
   </div>
   <div
-    class="tableEl-row-cell blockTimingCol headingMobileShown w-150p"
+    class="tableEl-row-cell blockTimingCol onlydesktop"
     data-cell-header="Age"
   >
     <span data-from-now="<%= @block.timestamp %>"> </span>
   </div>
   <%= if System.get_env("HIDE_BLOCK_MINER") !== "true" do %>
   <div
-    class="tableEl-row-cell blockTimingCol headingMobileShown w-150p"
+    class="tableEl-row-cell blockTimingCol onlydesktop"
     data-cell-header="Miner"
   >
     <div class="text-truncate">
@@ -40,7 +40,7 @@
     <span>-</span>
   <% end %>
   <div
-    class="tableEl-row-cell blockTimingCol headingMobileShown w-150p"
+    class="tableEl-row-cell blockTimingCol"
     data-cell-header="Reward"
   >
   <%= if BlockScoutWeb.BlockView.show_reward?(@block.rewards) do %>
