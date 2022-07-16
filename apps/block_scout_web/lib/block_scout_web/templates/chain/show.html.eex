@@ -164,7 +164,23 @@
       </div>
   </div>
 </div>
-
+<div class="asideToolbar asideToolbar-actions justify-content-around mobile-only">
+            <a href="#" class="asideToolbar__item" role="button">
+                <span class="asideToolbar__item-icon"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 1H2C1.44772 1 1 1.44772 1 2V5C1 5.55228 1.44772 6 2 6H5C5.55228 6 6 5.55228 6 5V2C6 1.44772 5.55228 1 5 1Z" stroke="#6D00F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M13 1H10C9.44772 1 9 1.44772 9 2V5C9 5.55228 9.44772 6 10 6H13C13.5523 6 14 5.55228 14 5V2C14 1.44772 13.5523 1 13 1Z" stroke="#6D00F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M5 9H2C1.44772 9 1 9.44772 1 10V13C1 13.5523 1.44772 14 2 14H5C5.55228 14 6 13.5523 6 13V10C6 9.44772 5.55228 9 5 9Z" stroke="#6D00F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M13 9H10C9.44772 9 9 9.44772 9 10V13C9 13.5523 9.44772 14 10 14H13C13.5523 14 14 13.5523 14 13V10C14 9.44772 13.5523 9 13 9Z" stroke="#6D00F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> </svg> </span>
+                <span class="asideToolbar__item-text">Блоки</span>
+            </a>
+            <a href="#" class="asideToolbar__item" role="button">
+                <span class="asideToolbar__item-icon"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.97027 7.39764C7.82195 7.46205 7.66197 7.49528 7.50027 7.49528C7.33857 7.49528 7.17859 7.46205 7.03027 7.39764L1.33027 4.75764C1.23771 4.71096 1.15993 4.6395 1.10558 4.55122C1.05124 4.46294 1.02246 4.36131 1.02246 4.25764C1.02246 4.15398 1.05124 4.05234 1.10558 3.96407C1.15993 3.87579 1.23771 3.80433 1.33027 3.75764L7.03027 1.09764C7.17859 1.03323 7.33857 1 7.50027 1C7.66197 1 7.82195 1.03323 7.97027 1.09764L13.6703 3.73764C13.7628 3.78433 13.8406 3.85579 13.895 3.94407C13.9493 4.03234 13.9781 4.13398 13.9781 4.23764C13.9781 4.34131 13.9493 4.44294 13.895 4.53122C13.8406 4.6195 13.7628 4.69096 13.6703 4.73764L7.97027 7.39764Z" stroke="#6D00F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M14 7.84766L7.9 10.6577C7.76972 10.7171 7.62819 10.7478 7.485 10.7478C7.34181 10.7478 7.20028 10.7171 7.07 10.6577L1 7.84766" stroke="#6D00F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M14 11.0977L7.9 13.9077C7.76972 13.9671 7.62819 13.9978 7.485 13.9978C7.34181 13.9978 7.20028 13.9671 7.07 13.9077L1 11.0977" stroke="#6D00F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> </svg> </span>
+                <span class="asideToolbar__item-text">Транзакции</span>
+            </a>
+        </div>
 <section class="container clear-container">
 
   <!-- MARK: Blocks -->

@@ -48,7 +48,7 @@
         <button data-error-message class="alert alert-danger col-12 text-left" style="display: none;">
           <span href="#" class="alert-link"><%= gettext("Something went wrong, click to reload.") %></span>
         </button>
-        <div data-empty-response-message style="display: none;" class="mb-20p">
+        <div data-empty-response-message style="display: none;" class="mb-20p mh-20p">
           <div class="tile tile-muted text-center">
             <span data-selector="empty-internal-transactions-list"><%= gettext "There are no internal transactions for this address." %></span>
           </div>

@@ -10,9 +10,9 @@
       <%= render BlockScoutWeb.AddressView, "_tabs.html", address: @address, is_proxy: is_proxy, conn: @conn %>
       <div class="card-body p-clear" data-async-listing="<%= @current_path %>">
         <%= render BlockScoutWeb.CommonComponentsView, "_channel_disconnected_message.html", text: gettext("Connection Lost, click to load newer blocks") %>
-
-        <h2 class="card-title"><%= gettext "Balances" %></h2>
-
+        <div class="mh-20p">
+          <h2 class="card-title"><%= gettext "Balances" %></h2>
+        </div>
         <!-- Chart -->
         <div data-chart-loading-message class="tile tile-muted text-center mt-3 mb-4">
           <%= render BlockScoutWeb.CommonComponentsView, "_loading_spinner.html", loading_text: gettext("Loading chart...") %>
@@ -30,7 +30,7 @@
           <span href="#" class="alert alert-danger"><%= gettext("Something went wrong, click to reload.") %></span>
         </div>
 
-        <div data-empty-response-message style="display: none;">
+        <div data-empty-response-message style="display: none;" class="mh-20p">
           <div class="tile tile-muted text-center" data-selector="empty-coin-balances-list">
             <%= gettext "There is no coin history for this address." %>
           </div>
