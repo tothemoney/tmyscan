@@ -1,4 +1,4 @@
-<section class="container">
+<section class="container clear-container">
   <%= render(
     OverviewView,
     "_details.html",
@@ -10,9 +10,9 @@
   ) %>
 
   <section>
-    <div class="card">
+    <div class="card card-chain-blocks-fix">
       <%= render OverviewView, "_tabs.html", assigns %>
-      <div class="card-body">
+      <div class="card-body p-clear">
         <section>
           <div class="d-flex justify-content-between align-items-baseline">
             <h3><%= gettext "Metadata" %></h3>

@@ -1,12 +1,12 @@
 <section
-    class="container"
+    class="container clear-container"
     data-page="search-results"
     data-chain-id="<%= Application.get_env(:block_scout_web, :chain_id) %>"
 	data-display-token-icons="<%= System.get_env("DISPLAY_TOKEN_ICONS") %>"
 >
   <%= render BlockScoutWeb.Advertisement.TextAdView, "index.html", conn: @conn %>
-  <div class="card">
-    <div class="card-body" data-async-load data-async-listing="<%= @current_path %>">
+  <div class="card card-chain-blocks-fix">
+    <div class="card-body p-clear" data-async-load data-async-listing="<%= @current_path %>">
       <div class="search-input-container mb-3">
 			<input data-search-field="" class="form-control search-input" type="text" name="filter" value="<%= @conn.params["q"] %>" placeholder="Search" id="search-text-input">
 	  </div>

@@ -1,5 +1,5 @@
-<div class="card">
-  <div class="card-body">
+<div class="card card-chain-blocks-fix">
+  <div class="card-body p-clear">
     <h1 class="card-title"><%= gettext "Input" %> </h1>
     <!-- Input -->
     <%= case @decoded_input_data do %>

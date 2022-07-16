@@ -1,12 +1,12 @@
-<section class="container">
+<section class="container clear-container">
   <% is_proxy = BlockScoutWeb.AddressView.smart_contract_is_proxy?(@address) %>
 
   <%= render BlockScoutWeb.AddressView, "overview.html", address: @address, is_proxy: is_proxy, conn: @conn, exchange_rate: @exchange_rate, coin_balance_status: @coin_balance_status, counters_path: @counters_path %>
   <section data-page="address-logs">
-  <div class="card">
+  <div class="card card-chain-blocks-fix">
     <%= render BlockScoutWeb.AddressView, "_tabs.html", address: @address, is_proxy: is_proxy, conn: @conn %>
 
-    <div class="card-body" data-async-load data-async-listing="<%= @current_path %>">
+    <div class="card-body p-clear" data-async-load data-async-listing="<%= @current_path %>">
       <h2 class="card-title"><%= gettext "Logs" %></h2>
       <div class="logs-topbar">
 

@@ -7,7 +7,7 @@
   <section data-page="address-transactions" id="txs">
     <div class="card card-chain-blocks-fix">
       <%= render BlockScoutWeb.AddressView, "_tabs.html", address: @address, is_proxy: is_proxy, conn: @conn %>
-      <div class="card-body" data-async-listing="<%= @current_path %>">
+      <div class="card-body p-clear" data-async-listing="<%= @current_path %>">
         <%= render BlockScoutWeb.CommonComponentsView, "_channel_disconnected_message.html", text: gettext("Connection Lost, click to load newer transactions") %>
         <div class="clearfix">
           <div class="top-pagination-outer-container float-right">

@@ -1,8 +1,8 @@
-<section class="container">
+<section class="container clear-container">
   <div class="row">
     <div class="col-12"> 
-      <div class="card">
-        <div class="card-body">
+      <div class="card card-chain-blocks-fix">
+        <div class="card-body p-clear">
           <h1 class="card-title"><%= gettext "Invalid Transaction Hash" %></h1>
           <div class="tile tile-muted text-center">
             <span> <span class="font-weight-bold"><%= @transaction_hash %></span> <%= gettext "is not a valid transaction hash" %> </span>
