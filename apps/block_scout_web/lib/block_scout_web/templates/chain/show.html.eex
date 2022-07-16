@@ -166,6 +166,8 @@
 </div>
 
 <section class="container clear-container">
+
+  <!-- MARK: Blocks -->
   <div class="card card-chain-blocks-fix js-ad-dependant-mb-3">
     <div class="card-body p-clear">
       <%= link(gettext("View All Blocks"), to: blocks_path(BlockScoutWeb.Endpoint, :index), class: "btnEl float-right") %>
@@ -198,6 +200,7 @@
 
   <%= render BlockScoutWeb.Advertisement.BannersAdView, "_banner_728.html", conn: @conn %>
 
+  <!-- MARK: Transactions -->
   <div class="card card-chain-blocks-fix">
     <div class="card-body p-clear">
       <%= link(gettext("View All Transactions"), to: blocks_path(BlockScoutWeb.Endpoint, :index), class: "btnEl float-right") %>

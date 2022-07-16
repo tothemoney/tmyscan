@@ -534,6 +534,7 @@ input:not([type="submit"]) {
     background: #6523B7;
     box-shadow: 0px 4px 4px rgba(101, 35, 183, 0.19);
     text-decoration: none;
+    color: #fff;
   }
 
   &:focus {
@@ -808,4 +809,5 @@ input:not([type="submit"]) {
 .p-clear {
   padding-left: 0 !important;
   padding-right: 12px !important;
+  padding-top: 15px !important;
 }
