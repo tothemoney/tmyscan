@@ -15,14 +15,14 @@
         <div class="tableEl tableEl-header-shown-responsive tableEl-Beetween tableEl-row-between">
           <div class="tableEl-header">
             <div class="tableEl-header-col">№ Block</div>
-            <div class="tableEl-header-col">Type</div>
+            <div class="tableEl-header-col onlydesktop">Type</div>
             <div class="tableEl-header-col">Transactions</div>
-            <div class="tableEl-header-col">Size</div>
-            <div class="tableEl-header-col">Age</div>
-            <div class="tableEl-header-col">Miner</div>
-            <div class="tableEl-header-col">Reward</div>
-            <div class="tableEl-header-col">Priority Fee</div>
-            <div class="tableEl-header-col">Burnt Fees</div>
+            <div class="tableEl-header-col onlydesktop">Size</div>
+            <div class="tableEl-header-col onlydesktop">Age</div>
+            <div class="tableEl-header-col onlydesktop">Miner</div>
+            <div class="tableEl-header-col onlydesktop">Reward</div>
+            <div class="tableEl-header-col onlydesktop">Priority Fee</div>
+            <div class="tableEl-header-col onlydesktop">Burnt Fees</div>
             <div class="tableEl-header-col">Gas</div>
           </div>
           <div class="tableEl-row-wrapper" data-items>
