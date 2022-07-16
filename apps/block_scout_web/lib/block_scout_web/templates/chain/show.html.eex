@@ -184,8 +184,8 @@
           <div class="tableEl-header">
               <div class="tableEl-header-col">№ Block</div>
               <div class="tableEl-header-col">Transactions</div>
-              <div class="tableEl-header-col">Age</div>
-              <div class="tableEl-header-col">Miner</div>
+              <div class="tableEl-header-col js-ad-dependant-mb-3">Age</div>
+              <div class="tableEl-header-col js-ad-dependant-mb-3">Miner</div>
               <div class="tableEl-header-col">Reward</div>
           </div>
           <!-- MARK: FIX Block Mined, awaiting import... -->

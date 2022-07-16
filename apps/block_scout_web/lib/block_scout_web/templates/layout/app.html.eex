@@ -225,7 +225,7 @@
       <% end %>
 
       <%= render BlockScoutWeb.LayoutView, "_wallet_header.html", assigns %>
-
+      <%= render BlockScoutWeb.LayoutView, "_wallet_aside_toolbar.html", assigns %>
       <%= @inner_content %>
 
 
