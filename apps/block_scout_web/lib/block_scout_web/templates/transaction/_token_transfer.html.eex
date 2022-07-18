@@ -10,6 +10,6 @@
     <%= @token_transfer |> BlockScoutWeb.AddressView.address_partial_selector(:from, @address, true) |> BlockScoutWeb.RenderHelpers.render_partial() %>
     <span>&rarr;</span>
     <%= @token_transfer |> BlockScoutWeb.AddressView.address_partial_selector(:to, @address, true) |> BlockScoutWeb.RenderHelpers.render_partial() %>
+    <%= render BlockScoutWeb.TransactionView, "_total_transfers.html", Map.put(assigns, :transfer, @token_transfer) %>
   </div>
-  </span>
 </div>

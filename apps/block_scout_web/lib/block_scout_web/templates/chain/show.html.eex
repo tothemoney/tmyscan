@@ -202,7 +202,7 @@
   <!-- MARK: Transactions -->
   <div class="card card-chain-blocks-fix">
     <div class="card-body p-clear">
-      <%= link(gettext("View All Transactions"), to: blocks_path(BlockScoutWeb.Endpoint, :index), class: "btnEl float-right") %>
+    <%= link(gettext("View All Transactions"), to: transaction_path(BlockScoutWeb.Endpoint, :index), class: "btnEl float-right") %>
 
       <div class="tableEl-wrapper tableEl-wrapper-pdSm tableEl-shadows">
         <div data-selector="channel-batching-message" style="display: none;" class="mb-20p">

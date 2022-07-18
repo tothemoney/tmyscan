@@ -40,9 +40,10 @@
     class="tableEl-row-cell "
     data-cell-header="AMOUNT"
   >
-    <span>
-      <%= value(@transaction, include_label: false) %> <%= gettext "Ether" %>  <%= formatted_fee(@transaction, denomination: :ether, include_label: false) %> <%= gettext "TX Fee" %>
-    </span>
+    <div class="d-flex flex-column">
+      <span><%= value(@transaction, include_label: false) %> <%= gettext "Ether" %></span>
+      <span><%= formatted_fee(@transaction, denomination: :ether, include_label: false) %> <%= gettext "TX Fee" %></span>
+    </div>
   </div>
   <div
     class="tableEl-row-cell  onlydesktop"
