@@ -10,7 +10,7 @@
   <section data-page="token-transfer-list" id="transfers">
     <div class="card card-chain-blocks-fix">
       <%= render OverviewView, "_tabs.html", assigns %>
-      <div class="card-body p-clear" data-async-load data-async-listing="<%= @current_path %>">
+      <div class="card-body" data-async-load data-async-listing="<%= @current_path %>">
         <h2 class="card-title list-title-description"><%= gettext "Token Transfers" %></h2>
 
         <div class="list-top-pagination-container-wrapper">

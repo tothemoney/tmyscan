@@ -1,7 +1,7 @@
 <section class="address-overview">
   <div class="row">
     <div class="card-section col-md-12 col-lg-7 pr-0-md js-ad-dependant-mb-2">
-      <div class="card">
+      <div class="card card-chain-blocks-fix">
         <div class="card-body">
           <h1 class="card-title">
             <%= if token_name?(@token) do %>
