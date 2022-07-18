@@ -6,7 +6,7 @@
     <span><%= render BlockScoutWeb.TransactionView, "_link.html", transaction_hash: @token_transfer.transaction_hash %></span>
   </div>
   <div class="tableEl-row-cell" data-cell-header="Transfer">
-    <span class="text-nowrap">
+    <div class="d-flex flex-column">
         <%= link to: address_token_transfers_path(@conn, :index, Address.checksum(@token_transfer.from_address), Address.checksum(@token.contract_address_hash)), "data-test": "address_hash_link" do %>
             <%= render(
                   BlockScoutWeb.AddressView,

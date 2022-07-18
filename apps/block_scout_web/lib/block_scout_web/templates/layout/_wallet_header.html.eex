@@ -34,6 +34,19 @@
         <nav class="MainNavbar">
             <ul class="d-flex justify-content-between">
                 <%= if Application.get_env(:block_scout_web, BlockScoutWeb.WebRouter)[:enabled] do %>
+                
+                    <li class="dropdown-element">
+                        <a href="#">
+                            <%= gettext("Компания") %>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="https://tmychain.org/docs">
+                                    <%= gettext("Документы") %>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="dropdown-element">
                         <a href="#">
                             <%= gettext("Blocks") %>
