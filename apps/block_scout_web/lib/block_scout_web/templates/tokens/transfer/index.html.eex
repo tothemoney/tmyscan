@@ -11,7 +11,6 @@
     <div class="card card-chain-blocks-fix">
       <%= render OverviewView, "_tabs.html", assigns %>
       <div class="card-body" data-async-load data-async-listing="<%= @current_path %>">
-        <h2 class="card-title list-title-description"><%= gettext "Token Transfers" %></h2>
 
         <div class="list-top-pagination-container-wrapper">
           <%= render BlockScoutWeb.CommonComponentsView, "_pagination_container.html", position: "top", cur_page_number: "1", show_pagination_limit: true, data_next_page_button: true, data_prev_page_button: true %>
@@ -27,10 +26,25 @@
           </span>
         </div>
 
-        <div data-items>
-          <%= render BlockScoutWeb.CommonComponentsView, "_tile-loader.html" %>
+        <div class="tableEl-wrapper tableEl-wrapper-pdSm tableEl-shadows">
+          <div class="tableEl-pre-heading d-flex align-items-center">
+            <div class="tableEl-pre-heading__title"><%= gettext "Token Transfers" %></div>
+          </div>
+          <div class="tableEl tableEl-header-shown-responsive tableEl-Beetween tableEl-row-between">
+            <div class="tableEl-header">
+              <div class="tableEl-header-col onlydesktop">Type</div>
+              <div class="tableEl-header-col">Hash</div>
+              <div class="tableEl-header-col">Transfer</div>
+              <div class="tableEl-header-col">Total</div>
+              <div class="tableEl-header-col onlydesktop">№ Block</div>
+              <div class="tableEl-header-col onlydesktop">Age</div>
+            </div>
+            <div class="tableEl-row-wrapper" data-items>
+              <%= render BlockScoutWeb.CommonComponentsView, "_tile-loader.html" %>
+            </div>
+          </div>
         </div>
-
+        
         <%= render BlockScoutWeb.CommonComponentsView, "_pagination_container.html", position: "bottom", cur_page_number: "1", show_pagination_limit: true, data_next_page_button: true, data_prev_page_button: true %>
 
       </div>
