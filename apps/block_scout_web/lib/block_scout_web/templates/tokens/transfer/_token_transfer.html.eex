@@ -1,16 +1,12 @@
-<!-- MARK: CHANGE LAYOUT TO TABLE -->
-<div class="tile tile-type-token-transfer fade-in" data-test="token-transfer" data-identifier-hash="<%= @token_transfer.transaction_hash %>-<%= @token_transfer.log_index %>">
-  <div class="row tile-body">
-    <!-- Color Block -->
-    <div class="tile-transaction-type-block col-md-2 d-flex flex-row flex-md-column">
-      <span class="tile-label">
-        <%= render(BlockScoutWeb.CommonComponentsView, "_token_transfer_type_display_name.html", type: Chain.get_token_transfer_type(@token_transfer)) %>
-      </span>
-    </div>
-    <!-- Content -->
-    <div class="col-md-7 col-lg-8 d-flex flex-column pr-2 pr-sm-2 pr-md-0">
-      <%= render BlockScoutWeb.TransactionView, "_link.html", transaction_hash: @token_transfer.transaction_hash %>
-      <span class="text-nowrap">
+<div class="tableEl-row fade-in" data-test="token-transfer" data-identifier-hash="<%= @token_transfer.transaction_hash %>-<%= @token_transfer.log_index %>">
+  <div class="tableEl-row-cell onlydesktop" data-cell-header="Type">
+    <span><%= render(BlockScoutWeb.CommonComponentsView, "_token_transfer_type_display_name.html", type: Chain.get_token_transfer_type(@token_transfer)) %></span>
+  </div>
+  <div class="tableEl-row-cell purpleCol headingMobileShown" data-cell-header="Hash">
+    <span><%= render BlockScoutWeb.TransactionView, "_link.html", transaction_hash: @token_transfer.transaction_hash %></span>
+  </div>
+  <div class="tableEl-row-cell headingMobileShown" data-cell-header="Transfer">
+    <span class="text-nowrap">
         <%= link to: address_token_transfers_path(@conn, :index, Address.checksum(@token_transfer.from_address), Address.checksum(@token.contract_address_hash)), "data-test": "address_hash_link" do %>
             <%= render(
                   BlockScoutWeb.AddressView,
@@ -30,22 +26,19 @@
                   use_custom_tooltip: false
                 ) %>
         <% end %>
-      </span>
-      <span class="d-flex flex-md-row flex-column mt-3 mt-md-0">
-        <span class="tile-title">
-          <%= render BlockScoutWeb.TransactionView, "_total_transfers.html", Map.put(assigns, :transfer, @token_transfer) %>
-        </span>
-      </span>
-    </div>
-    <!-- Block info -->
-    <div class="col-md-3 col-lg-2 d-flex flex-row flex-md-column flex-nowrap justify-content-center text-md-right mt-3 mt-md-0">
-      <span class="mr-2 mr-md-0 order-1">
+  </div>
+  <div class="tableEl-row-cell headingMobileShown" data-cell-header="Total">
+    <span><%= render BlockScoutWeb.TransactionView, "_total_transfers.html", Map.put(assigns, :transfer, @token_transfer) %></span>
+  </div>
+  <div class="tableEl-row-cell purpleCol onlydesktop" data-cell-header="№ Block">
+    <span class="mr-2 mr-md-0 order-1">
         <%= link(
           gettext("Block #%{number}", number: @token_transfer.block_number),
           to: block_path(BlockScoutWeb.Endpoint, :show, @token_transfer.block_number)
         ) %>
       </span>
-      <span class="mr-2 mr-md-0 order-2" data-from-now="<%= @token_transfer.transaction.block && @token_transfer.transaction.block.timestamp %>"></span>
-    </div>
+  </div>
+  <div class="tableEl-row-cell onlydesktop" data-cell-header="Age">
+    <span class="mr-2 mr-md-0 order-2" data-from-now="<%= @token_transfer.transaction.block && @token_transfer.transaction.block.timestamp %>"></span>
   </div>
 </div>
