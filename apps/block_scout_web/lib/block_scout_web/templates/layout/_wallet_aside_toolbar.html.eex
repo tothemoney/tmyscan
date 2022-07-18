@@ -29,7 +29,7 @@
                     </svg> </span>
                 <span class="asideToolbar__item-text">Tokens</span>
             </a>
-            <a href="https://tmyscan.com" class="asideToolbar__item asideToolbar__item-active" role="button">
+            <a href="https://tmyscan.com" class="asideToolbar__item" role="button">
                 <span class="asideToolbar__item-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path

@@ -20,7 +20,7 @@
       <div data-empty-response-message class="tile tile-muted text-center" style="display: none;">
         <span data-selector="empty-transactions-list">
           <%= gettext "There are no pending transactions." %>
-        </span>
+        </span> 
       </div>
       <div data-items data-selector="transactions-pending-list">
         <%= render BlockScoutWeb.CommonComponentsView, "_tile-loader.html" %>
