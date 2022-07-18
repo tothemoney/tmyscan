@@ -28,14 +28,14 @@
         </div>
         <div class="tableEl tableEl-header-shown-responsive tableEl-Beetween tableEl-row-between">
           <div class="tableEl-header">
-            <div class="tableEl-header-col">Type</div>
-            <div class="tableEl-header-col">Status</div>
+            <div class="tableEl-header-col onlydesktop">Type</div>
+            <div class="tableEl-header-col onlydesktop">Status</div>
             <div class="tableEl-header-col">Hash</div>
             <div class="tableEl-header-col">Sender/Receiver</div>
             <div class="tableEl-header-col">Amount</div>
-            <div class="tableEl-header-col">Transfer</div>
-            <div class="tableEl-header-col">№ Block</div>
-            <div class="tableEl-header-col">Age</div>
+            <div class="tableEl-header-col onlydesktop">Transfer</div>
+            <div class="tableEl-header-col onlydesktop">№ Block</div>
+            <div class="tableEl-header-col onlydesktop">Age</div>
           </div>
           <div class="tableEl-row-wrapper" data-selector="transactions-list" data-items>
             <%= render BlockScoutWeb.CommonComponentsView, "_tile-loader.html" %>

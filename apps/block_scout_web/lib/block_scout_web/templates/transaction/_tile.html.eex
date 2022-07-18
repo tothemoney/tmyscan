@@ -3,7 +3,7 @@
 
 <div class="tableEl-row fade-up-blocks-chain" data-test="<%= type_suffix(@transaction) %>" data-identifier-hash="<%= @transaction.hash %>">
   <div
-    class="tableEl-row-cell  onlydesktop"
+    class="tableEl-row-cell onlydesktop"
     data-cell-header="TYPE"
   >
     <span data-test="transaction_type">
@@ -11,7 +11,7 @@
     </span>
   </div>
   <div
-    class="tableEl-row-cell  onlydesktop"
+    class="tableEl-row-cell onlydesktop"
     data-cell-header="STATUS"
   >
     <span data-test="transaction_status">
@@ -46,7 +46,7 @@
     </div>
   </div>
   <div
-    class="tableEl-row-cell  onlydesktop"
+    class="tableEl-row-cell onlydesktop"
     data-cell-header="TRANSFER"
   >
     <%= if involves_token_transfers?(@transaction) do %>
@@ -65,7 +65,7 @@
     <% end %>
   </div>
   <div
-    class="tableEl-row-cell  onlydesktop"
+    class="tableEl-row-cell onlydesktop"
     data-cell-header="№ BLOCK"
   >
     <span class="purpleCol">
@@ -73,7 +73,7 @@
     </span>
   </div>
   <div
-    class="tableEl-row-cell  onlydesktop"
+    class="tableEl-row-cell onlydesktop"
     data-cell-header="AGE"
   >
     <span data-from-now="<%= block_timestamp(@transaction) %>"></span>
