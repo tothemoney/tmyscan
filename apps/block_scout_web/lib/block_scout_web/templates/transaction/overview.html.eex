@@ -462,8 +462,7 @@
                       title: gettext("Copy Txn UTF-8 Input"),
                       style: "display: none;" %>
                 </div>
-              </div>
-              <!-- Textarea -->
+                <!-- Textarea -->
               <div class="tx-raw-input">
                 <div class="tile tile-muted">
                   <pre class="pre-scrollable pre-scrollable-shorty pre-wrap mb-0"><code><%= @transaction.input %></code></pre>
