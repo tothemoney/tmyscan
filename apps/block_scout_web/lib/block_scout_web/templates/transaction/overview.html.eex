@@ -27,113 +27,172 @@
 <% {:ok, created_from_address} = if to_address_hash, do: Chain.hash_to_address(to_address_hash), else: {:ok, nil} %>
 <% created_from_address_hash_str = if from_address_hash(created_from_address), do: "0x" <> Base.encode16(from_address_hash(created_from_address).bytes, case: :lower), else: nil %>
 <%= render BlockScoutWeb.Advertisement.TextAdView, "index.html", conn: @conn %>
+<section class="fs-14" data-page="transaction-details" data-page-transaction-hash="<%= @transaction %>">
+  <div class="row">
+    <div class="col-md-12 clear-container">
+      <!-- Transaction Details -->
+      <div class="card card-chain-blocks-fix js-ad-dependant-mb-3">
+        <div class="card-body">
+          <%= cond do %>
+            <% Enum.member?(circles_addresses_list, address_hash_str) -> %>
+              <div class="custom-dapp-header-container">
+                <img class="custom-address-icon"/>
+              </div>
+            <% Enum.member?(circles_addresses_list, created_from_address_hash_str) -> %>
+              <div class="custom-dapp-header-container">
+                <img class="custom-address-icon"/>
+              </div>
+            <% true -> %>
+              <%= nil %>
+          <% end %>
+          
+          <%= if status == :pending do %>
+            <div class="tile tile-muted d-flex justify-content-center align-items-center mb-4">
+              <div class="loading-spinner">
+                <span class="loading-spinner-block-1"></span>
+                <span class="loading-spinner-block-2"></span>
+              </div>
+              <%= gettext("This transaction is pending confirmation.") %>
+            </div>
+          <% end %>
+          <div class="d-flex flex-row">
+            <%= if show_tenderly_link?() do %>
+              <div class="mr-4 mb-4">
+                <%= render BlockScoutWeb.CommonComponentsView, "_tenderly_link.html",
+                    transaction_hash: @transaction.hash,
+                    tenderly_chain_path: tenderly_chain_path() %>
+              </div>
+            <% end %>
+          </div>
 
-<div class="secBox secBox-pdSm" data-page="transaction-details" data-page-transaction-hash="<%= @transaction %>">
-  <div class="d-flex justify-content-between align-items-center">
-    <div class="secBox-heading"><%= gettext "Transaction Details" %></div>
-    <span class="taType taType-In d-lg-none d-flex"></span>
-  </div>
-  <div class="secBox-list">
-    <!-- TRANSACTION HASH -->
-    <div class="secBox-list__item">
-      <div class="secBox-list__item-label"><%= gettext "Transaction Hash" %></div>
-      <div class="secBox-list__item-txt">
-        <span class="transaction-details-address" data-test="transaction_detail_hash"><%= @transaction %> </span>
-              <%= render BlockScoutWeb.CommonComponentsView, "_btn_copy.html",
+          <div class="secBox secBox-pdSm">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="secBox-heading">Transaction Details</div>
+                <span class="taType taType-In d-lg-none d-flex">IN</span>
+            </div>
+
+            <div class="secBox-list">
+              <div class="secBox-list__item">
+                <div class="secBox-list__item-label">
+                  <%= gettext "Transaction Hash:" %>
+                </div>
+                <div class="secBox-list__item-txt" data-test="transaction_detail_hash">
+                  <%= @transaction %> 
+                  <%= render BlockScoutWeb.CommonComponentsView, "_btn_copy.html",
                   additional_classes: ["btn-copy-icon-small", "btn-copy-icon-custom", "btn-copy-icon-no-borders"],
                   clipboard_text: @transaction,
                   aria_label: gettext("Copy Transaction Hash"),
                   title: gettext("Copy Txn Hash") %>
-      </div>
-    </div>
-    <!-- TRANSACTION RESULT -->
-    <div class="secBox-list__item">
-      <div class="secBox-list__item-label"><%= gettext "Result" %></div>
-      <div class="secBox-list__item-txt">
-        <% formatted_result = BlockScoutWeb.TransactionView.formatted_result(status) %>
-        <span class="mr-4" data-transaction-status="<%= formatted_result %>"><%= render BlockScoutWeb.CommonComponentsView, "_status_icon.html", status: status %><%= formatted_result %></span>
-      </div>
-    </div>
-    <!-- TRANSACTION STATUS -->
-    <div class="secBox-list__item">
-      <div class="secBox-list__item-label"><%= gettext "Status" %></div>
-      <div class="secBox-list__item-txt">
-        <% formatted_status = BlockScoutWeb.TransactionView.formatted_status(status) %>
-        <% confirmations = confirmations(@transaction, block_height: @block_height) %>
-        <span class="mr-4">
-          <span data-transaction-status="<%= formatted_status %>">
-            <%= if status == :pending do %>
-              <%= render BlockScoutWeb.FormView, "_tag.html", text: formatted_status, additional_classes: ["large"] %></span>
-            <% else %>
-              <%= render BlockScoutWeb.FormView, "_tag.html", text: formatted_status, additional_classes: ["success", "large"] %></span>
-            <% end %>
-                
-            <%= if confirmations > 0 do %>
-              <span class="bs-label large ml-2 confirmations-label"><%= gettext "Confirmed by " %><span data-selector="block-confirmations"><%= confirmations %></span><%= " " <> confirmations_ds_name(confirmations) %></span>
-            <% end %>
-          </span>
-        </span>
-      </div>
-    </div>
-    <!-- Revert reason -->
-    <%= if status == {:error, "Reverted"} || status == {:error, "execution reverted"} do %>
-    <div class="secBox-list__item">
-      <div class="secBox-list__item-label"><%= gettext "Revert reason" %></div>
-      <div class="secBox-list__item-txt">
-        <%= case BlockScoutWeb.TransactionView.transaction_revert_reason(@transaction) do %>
-          <% {:error, _contract_not_verified, candidates} when candidates != [] -> %>
-          <% {:ok, method_id, text, mapping} = Enum.at(candidates, 0) %>
-          <%= render(BlockScoutWeb.TransactionView, "_decoded_input_body.html", method_id: method_id, text: text, mapping: mapping, error: true) %>
-          <% {:ok, method_id, text, mapping} -> %>
-          <%= render(BlockScoutWeb.TransactionView, "_decoded_input_body.html", method_id: method_id, text: text, mapping: mapping, error: true) %>
-          <% _ -> %>
-          <% hex = BlockScoutWeb.TransactionView.get_pure_transaction_revert_reason(@transaction) %>
-          <% utf8 = BlockScoutWeb.TransactionView.decoded_revert_reason(@transaction) %>
-          <div class="tile tile-muted">
-            <pre class="pre-scrollable pre-scrollable-shorty pre-wrap mb-0"><code>Raw:<%= raw("\t") %><%= hex %><%= raw("\n") %>UTF-8:<%= raw("\t") %><%= utf8 %></code></pre>
+                </div>
+              </div>
+            </div>
           </div>
-        <% end %>
-      </div>
-    </div>
-    <% end %>
-    <!-- TRANSACTION BLOCK -->
-    <div class="secBox-list__item">
-      <div class="secBox-list__item-label"><%= gettext "Block" %></div>
-      <div class="secBox-list__item-txt">
-        <span data-selector="block-number">
-          <%= if block do %>
-            <%= link(block, class: "transaction__link", to: block_path(@conn, :show, block)) %>
-          <% else %>
-            <%= formatted_result(status) %>
+          <!-- Verify in other explorers -->
+          <!-- <%= render BlockScoutWeb.AddressView, "_verify_other_explorers.html", hash: hash(@transaction), type: "tx" %> -->
+
+          <!-- Result -->
+          <div class="secBox-list__item">
+            <div class="secBox-list__item-label">
+              <%= gettext "Result: " %>
+            </div>
+            <div class="secBox-list__item-txt">
+              <% formatted_result = BlockScoutWeb.TransactionView.formatted_result(status) %>
+
+              <%= render BlockScoutWeb.CommonComponentsView, "_status_icon.html", status: status %><%= formatted_result %>
+              <span data-transaction-status="<%= formatted_result %>"><%= render BlockScoutWeb.CommonComponentsView, "_status_icon.html", status: status %><%= formatted_result %></span>
+            </div>
+          </div>
+
+          <!-- Status -->
+          <div class="secBox-list__item">
+            <div class="secBox-list__item-label">
+              <%= gettext "Status" %>
+            </div>
+            <div class="secBox-list__item-txt">
+              <% formatted_status = BlockScoutWeb.TransactionView.formatted_status(status) %>
+              <% confirmations = confirmations(@transaction, block_height: @block_height) %>
+              <span data-transaction-status="<%= formatted_status %>">
+                  <%= if status == :pending do %>
+                    <%= render BlockScoutWeb.FormView, "_tag.html", text: formatted_status, additional_classes: ["large"] %></span>
+                  <% else %>
+                    <%= render BlockScoutWeb.FormView, "_tag.html", text: formatted_status, additional_classes: ["success", "large"] %></span>
+                  <% end %>
+                
+                <%= if confirmations > 0 do %>
+                  <span class="bs-label large ml-2 confirmations-label"><%= gettext "Confirmed by " %><span data-selector="block-confirmations"><%= confirmations %></span><%= " " <> confirmations_ds_name(confirmations) %></span>
+                <% end %>
+              </span>
+            </div>
+          </div>
+          <!-- Revert reason -->
+          <%= if status == {:error, "Reverted"} || status == {:error, "execution reverted"} do %>
+          <div class="secBox-list__item">
+            <div class="secBox-list__item-label">
+              <%= gettext "Revert reason" %>
+            </div>
+            <div class="secBox-list__item-txt">
+              <%= case BlockScoutWeb.TransactionView.transaction_revert_reason(@transaction) do %>
+                <% {:error, _contract_not_verified, candidates} when candidates != [] -> %>
+                  <% {:ok, method_id, text, mapping} = Enum.at(candidates, 0) %>
+                  <%= render(BlockScoutWeb.TransactionView, "_decoded_input_body.html", method_id: method_id, text: text, mapping: mapping, error: true) %>
+                <% {:ok, method_id, text, mapping} -> %>
+                  <%= render(BlockScoutWeb.TransactionView, "_decoded_input_body.html", method_id: method_id, text: text, mapping: mapping, error: true) %>
+                <% _ -> %>
+                  <% hex = BlockScoutWeb.TransactionView.get_pure_transaction_revert_reason(@transaction) %>
+                  <% utf8 = BlockScoutWeb.TransactionView.decoded_revert_reason(@transaction) %>
+                  <div class="tile tile-muted">
+                      <pre class="pre-scrollable pre-scrollable-shorty pre-wrap mb-0"><code>Raw:<%= raw("\t") %><%= hex %><%= raw("\n") %>UTF-8:<%= raw("\t") %><%= utf8 %></code></pre>
+                  </div>
+              <% end %>
+            </div>
+          </div>
           <% end %>
-        </span>
-      </div>
-    </div>
-    <!-- TRANSACTION Timestamp -->
-    <%= if block && block.timestamp do %>
-    <div class="secBox-list__item">
-      <div class="secBox-list__item-label"><%= gettext "Timestamp" %></div>
-      <div class="secBox-list__item-txt" data-selector="block-timestamp">
-        <i class="fa-regular fa-clock"></i>
-        <span>
-          <span data-from-now="<%= block.timestamp %>"></span>
-        </span>
-        <%= case processing_time_duration(@transaction) do %>
-          <% :pending -> %>
-          <% nil %>
-          <% :unknown -> %>
-          <% nil %>
-          <% {:ok, interval_string} -> %>
-          | <%= gettext("Confirmed within") %> <%= interval_string %>
-        <% end %>
-      </div>
-    </div>
-    <% end %>
-    <!-- TRANSACTION From -->
-    <div class="secBox-list__item">
-      <div class="secBox-list__item-label"><%= gettext "From" %></div>
-      <div class="secBox-list__item-txt">
-        <%= link(
+          <!-- Block -->
+          <div class="secBox-list__item">
+            <div class="secBox-list__item-label">
+              <%= gettext "Block" %></dt>
+            </div>
+            <div class="secBox-list__item-txt" data-selector="block-number">
+              <%= if block do %>
+                <%= link(
+                      block,
+                      class: "transaction__link",
+                      to: block_path(@conn, :show, block)
+                    ) %>
+              <% else %>
+                <%= formatted_result(status) %>
+              <% end %>
+            </div>
+          </div>
+          <!-- Timestamp -->
+          <%= if block && block.timestamp do %>
+          <div class="secBox-list__item">
+            <div class="secBox-list__item-label">
+              <%= gettext "Timestamp" %>
+            </div>
+            <div class="secBox-list__item-txt" data-selector="block-timestamp">
+                <i class="fa-regular fa-clock"></i>
+                <span>
+                  <span data-from-now="<%= block.timestamp %>"></span>
+                </span>
+                <%= case processing_time_duration(@transaction) do %>
+                  <% :pending -> %>
+                    <% nil %>
+                  <% :unknown -> %>
+                    <% nil %>
+                  <% {:ok, interval_string} -> %>
+                    | <%= gettext("Confirmed within") %> <%= interval_string %>
+                <% end %>
+            </div>
+          </div>
+          <% end %>
+          <!-- From -->
+          <div class="secBox-list__item">
+            <div class="secBox-list__item-label">
+              <%= gettext "From" %>
+            </div>
+            <div class="secBox-list__item-txt">
+              <%= link(
                 from_address_hash,
                 to: address_path(@conn, :show, from_address_hash)
               ) %>
@@ -142,19 +201,21 @@
                 clipboard_text: from_address_hash,
                 aria_label: gettext("Copy From Address"),
                 title: gettext("Copy From Address") %>
-      </div>
-    </div>
-    <!-- TRANSACTION To -->
-    <div class="secBox-list__item">
-      <div class="secBox-list__item-label">
-        <%= if BlockScoutWeb.AddressView.contract?(to_address) && !created_address_hash do %>
+            </div>
+          </div>
+          <!-- To -->
+          <% to_address = @transaction |> Map.get(:to_address) || @transaction |> Map.get(:created_contract_address) %>
+          <% recipient_address_hash = to_address_hash || created_address_hash %>
+          <div class="secBox-list__item">
+            <div class="secBox-list__item-label">
+              <%= if BlockScoutWeb.AddressView.contract?(to_address) && !created_address_hash do %>
                 <%= gettext "Interacted With (To)" %>
               <% else %>
                 <%= gettext "To" %>
               <% end %>
-      </div>
-      <div class="secBox-list__item-txt">
-        <%= cond do %>
+            </div>
+            <div class="secBox-list__item-txt">
+              <%= cond do %>
                 <% created_address_hash -> %>
                   [<%= gettext("Contract") %>&nbsp;
                   <%= render BlockScoutWeb.AddressView, "_link.html", address: to_address, contract: BlockScoutWeb.AddressView.contract?(to_address), use_custom_tooltip: false, trimmed: false %>
@@ -173,17 +234,19 @@
                     title: gettext("Copy To Address") %>
                 <% true -> %>
               <% end %>
-      </div>
-    </div>
-    <%= case token_transfer_type(@transaction) do %>
+            </div>
+          </div>
+          <%= case token_transfer_type(@transaction) do %>
             <% {_type, %{token_transfers: token_transfers} = transaction_with_transfers} when is_list(token_transfers) and token_transfers != [] -> %>
               <!-- Tokens Transferred -->
               <% %{transfers: transfers, mintings: mintings, burnings: burnings, creations: creations} = aggregate_token_transfers(transaction_with_transfers.token_transfers) %>
               <%= if Enum.count(transfers) > 0 do %>
-              <div class="secBox-list__item">
-                    <div class="secBox-list__item-label"><%= gettext "Tokens Transferred" %></div>
+                <div class="secBox-list__item">
+                    <div class="secBox-list__item-label">
+                      <%= gettext "Tokens Transferred" %>
+                    </div>
                     <div class="secBox-list__item-txt">
-                      <table cellpadding="3" cellspacing="0">
+                    <table cellpadding="3" cellspacing="0">
                       <%= for transfer <- transfers do %>
                         <%= render BlockScoutWeb.TransactionView, "_total_transfers_from_to.html", Map.put(assigns, :transfer, transfer) %>
                       <% end %>
@@ -193,8 +256,10 @@
               <% end %>
               <!-- Tokens Minted -->
               <%= if Enum.count(mintings) > 0 do %>
-              <div class="secBox-list__item">
-                    <div class="secBox-list__item-label"><%= gettext "Tokens Minted" %></div>
+                <div class="secBox-list__item">
+                    <div class="secBox-list__item-label">
+                      <%= gettext "Tokens Minted" %>
+                    </div>
                     <div class="secBox-list__item-txt">
                       <table cellpadding="3" cellspacing="0">
                       <%= for minting <- mintings do %>
@@ -206,21 +271,27 @@
               <% end %>
               <!-- Tokens Burnt -->
               <%= if Enum.count(burnings) > 0 do %>
-              <div class="secBox-list__item">
-                    <div class="secBox-list__item-label"><%= gettext "Tokens Burnt" %></div>
+                <div class="secBox-list__item">
+                    <div class="secBox-list__item-label">
+                      <%= gettext "Tokens Burnt" %></dt>
+                    </div>
                     <div class="secBox-list__item-txt">
+                    <%= for burning  <- burnings do %>
                       <table cellpadding="3" cellspacing="0">
-                      <%= render BlockScoutWeb.TransactionView, "_total_transfers_from_to.html", Map.put(assigns, :transfer, burning) %>
-                    </table>
+                        <%= render BlockScoutWeb.TransactionView, "_total_transfers_from_to.html", Map.put(assigns, :transfer, burning) %>
+                      </table>
+                    <% end %>
                     </div>
                 </div>
               <% end %>
 
               <%= if Enum.count(creations) > 0 do %>
-              <div class="secBox-list__item">
-                    <div class="secBox-list__item-label"><%= gettext "Tokens Created" %></div>
+                <div class="secBox-list__item">
+                    <div class="secBox-list__item-label">
+                      <%= gettext "Tokens Created" %></dt>
+                    </div>
                     <div class="secBox-list__item-txt">
-                    <%= for creation  <- creations do %>
+                      <%= for creation  <- creations do %>
                     <table cellpadding="3" cellspacing="0">
                       <%= render BlockScoutWeb.TransactionView, "_total_transfers_from_to.html", Map.put(assigns, :transfer, creation) %>
                     </table>
@@ -231,152 +302,186 @@
             <% _ -> %>
           <% end %>
 
+          
           <!-- Value -->
           <div class="secBox-list__item">
-                    <div class="secBox-list__item-label"><%= gettext "Value" %></div>
-                    <div class="secBox-list__item-txt">
-                    <%= value(@transaction) %>
-                    <%= if !empty_exchange_rate?(@exchange_rate) do %>
-                      (<span data-wei-value=<%= @transaction.value.value %>
-                        data-usd-exchange-rate=<%= @exchange_rate.usd_value %>>
-                      </span>)
-                    <% end %>
-                    </div>
-                </div>
+            <div class="secBox-list__item-label">
+              <%= gettext "Value" %>
+            </div>
+            <div class="secBox-list__item-txt">
+              <%= value(@transaction) %>
+              <%= if !empty_exchange_rate?(@exchange_rate) do %>
+              (<span data-wei-value=<%= @transaction.value.value %>
+                data-usd-exchange-rate=<%= @exchange_rate.usd_value %>>
+              </span>)
+              <% end %>
+            </div>
+          </div>
+          <!-- Transaction Fee -->
+          <div class="secBox-list__item">
+              <div class="secBox-list__item-label">
+                <%= gettext "Transaction Fee" %>
+              </div>
+              <div class="secBox-list__item-txt">
+                <%= formatted_fee(@transaction, denomination: :ether) %>
+                <%= if !empty_exchange_rate?(@exchange_rate) do %>
+                  (<span data-wei-value=<%= fee(@transaction) %> data-usd-exchange-rate=<%= @exchange_rate.usd_value %>></span>)
+                <% end %>
+              </div>
+          </div>
 
-                <!-- Transaction Fee -->
-                <div class="secBox-list__item">
-                    <div class="secBox-list__item-label"><%= gettext "Transaction Fee" %></div>
-                    <div class="secBox-list__item-txt">
-                      <%= formatted_fee(@transaction, denomination: :ether) %>
-
-                      <%= if !empty_exchange_rate?(@exchange_rate) do %>
-                        (<span data-wei-value=<%= fee(@transaction) %> data-usd-exchange-rate=<%= @exchange_rate.usd_value %>></span>)
-                      <% end %>
-                    </div>
-                </div>
-
-                <!-- Gas Price -->
-                <div class="secBox-list__item">
-                    <div class="secBox-list__item-label"><%= gettext "Gas Price" %></div>
-                    <div class="secBox-list__item-txt"><%= gas_price(@transaction, :gwei) %></div>
-                </div>
+          <!-- Gas Price -->
+          <div class="secBox-list__item">
+              <div class="secBox-list__item-label">
+                <%= gettext "Gas Price" %>
+              </div>
+              <div class="secBox-list__item-txt">
+                <%= gas_price(@transaction, :gwei) %> 
+              </div>
+          </div>
+          <!-- Transaction Type -->
           <%= if !is_nil(type) do %>
-          <div class="secBox-list__item">
-                    <div class="secBox-list__item-label"><%= gettext "Transaction Type" %></div>
-                    <div class="secBox-list__item-txt"><%= type %></div>
+            <div class="secBox-list__item">
+                <div class="secBox-list__item-label">
+                  <%= gettext "Transaction Type" %>
                 </div>
+                <div class="secBox-list__item-txt">
+                  <%= type %>
+                </div>
+            </div>
           <% end %>
-          <<!-- Gas Limit -->
-          <div class="secBox-list__item">
-                    <div class="secBox-list__item-label"><%= gettext "Gas Limit" %></div>
-                    <div class="secBox-list__item-txt">
-                    <%= format_gas_limit(@transaction.gas) %>
-                    </div>
-                </div>
 
-                <%= if !is_nil(max_fee_per_gas) do %>
-                <div class="secBox-list__item">
-                    <div class="secBox-list__item-label"><%= gettext "Max Fee per Gas" %></div>
-                    <div class="secBox-list__item-txt"><%= format_wei_value(max_fee_per_gas, :gwei) %></div>
-                </div>
+          <!-- Gas Limit -->
+          <div class="secBox-list__item">
+              <div class="secBox-list__item-label">
+                <%= gettext "Gas Limit" %>
+              </div>
+              <div class="secBox-list__item-txt">
+                <%= format_gas_limit(@transaction.gas) %>
+              </div>
+          </div>
+          <%= if !is_nil(max_fee_per_gas) do %>
+          <div class="secBox-list__item">
+              <div class="secBox-list__item-label">
+                <%= gettext "Max Fee per Gas" %>
+              </div>
+              <div class="secBox-list__item-txt">
+                <%= format_wei_value(max_fee_per_gas, :gwei) %>
+              </div>
+          </div>
           <% end %>
           <%= if !is_nil(max_priority_fee_per_gas) do %>
           <div class="secBox-list__item">
-                    <div class="secBox-list__item-label"><%= gettext "Max Priority Fee per Gas" %></div>
-                    <div class="secBox-list__item-txt"><%= format_wei_value(max_priority_fee_per_gas, :gwei) %></div>
-                </div>
+              <div class="secBox-list__item-label">
+                <%= gettext "Max Priority Fee per Gas" %>
+              </div>
+              <div class="secBox-list__item-txt">
+                <%= format_wei_value(max_priority_fee_per_gas, :gwei) %>
+              </div>
+          </div>
           <% end %>
           <%= if !is_nil(priority_fee) do %>
           <div class="secBox-list__item">
-                    <div class="secBox-list__item-label"><%= gettext "Priority Fee / Tip" %></div>
-                    <div class="secBox-list__item-txt"><%= format_wei_value(priority_fee, :ether) %></div>
-                </div>
+              <div class="secBox-list__item-label">
+                <%= gettext "Priority Fee / Tip" %>
+              </div>
+              <div class="secBox-list__item-txt">
+                <%= format_wei_value(priority_fee, :ether) %>
+              </div>
+          </div>
           <% end %> 
-          <%= if !is_nil(burned_fee) do %>
-          <div class="secBox-list__item">
-                    <div class="secBox-list__item-label"><%= gettext "Transaction Burnt Fee" %></div>
-                    <div class="secBox-list__item-txt">
-                    <%= format_wei_value(burned_fee, :ether) %>
+           <%= if !is_nil(burned_fee) do %>
+            <div class="secBox-list__item">
+              <div class="secBox-list__item-label">
+                <%= gettext "Transaction Burnt Fee" %>
+              </div>
+              <div class="secBox-list__item-txt">
+                <i class="fa-solid fa-fire i-tooltip-2"></i> <%= format_wei_value(burned_fee, :ether) %>
                 <%= unless empty_exchange_rate?(@exchange_rate) do %>
                   (<span data-wei-value=<%= burned_fee_decimal %> data-usd-exchange-rate=<%= @exchange_rate.usd_value %>></span>)
                 <% end %>
-                    </div>
-                </div>
+              </div>
+            </div>
           <% end %>
           <!-- Gas Used by Transaction -->
           <div class="secBox-list__item">
-                    <div class="secBox-list__item-label"><%= gettext "Gas Used by Transaction" %></div>
-                    <div class="secBox-list__item-txt">
-                    <% gas_used_perc = gas_used_perc(@transaction) %>
-            <dd class="col-sm-9 col-lg-10"> <%= gas_used(@transaction) %> <%= if gas_used_perc, do: "| #{gas_used_perc}%" %></dd>
-                    </div>
-                </div>
-
-                <!-- Nonce, Index in Block -->
-                <div class="secBox-list__item">
-                    <div class="secBox-list__item-label"><%= gettext "Nonce" %><span class="index-label ml-2"
+              <div class="secBox-list__item-label">
+                <%= gettext "Gas Used by Transaction" %>
+              </div>
+              <div class="secBox-list__item-txt">
+                <% gas_used_perc = gas_used_perc(@transaction) %>
+                <%= gas_used(@transaction) %> <%= if gas_used_perc, do: "| #{gas_used_perc}%" %>
+              </div>
+          </div>
+          <!-- Nonce, Index in Block -->
+          <div class="secBox-list__item">
+              <div class="secBox-list__item-label">
+                <%= gettext "Nonce" %><span class="index-label ml-2"
                                           data-toggle="tooltip"
-                                          title="<%= gettext("Index position of Transaction in the block.") %>"><%= gettext "Position" %></span></div>
-                    <div class="secBox-list__item-txt">
-                    <dd class="col-sm-9 col-lg-10"> <%= @transaction.nonce %><span class="index-label ml-2"><%= if block, do: @transaction.index, else: formatted_result(status) %></span> </dd>
-                    </div>
-                </div>
+                                          title="<%= gettext("Index position of Transaction in the block.") %>"><%= gettext "Position" %></span>
+              </div>
+              <div class="secBox-list__item-txt">
+                <%= @transaction.nonce %>
+                <%= if block, do: @transaction.index, else: formatted_result(status) %>
+              </div>
+          </div>
           <%= unless value_transfer?(@transaction) do %>
           <div class="secBox-list__item">
-                    <div class="secBox-list__item-label"><%= gettext "Raw Input" %></div>
-                    <div class="secBox-list__item-txt">
-                    <dd class="col-sm-9 col-lg-10">
-                <div class="d-flex mb-3 justify-content-between">
-                  <!-- Dropdown -->
-                  <div class="dropdown">
-                    <button class="btn-dropdown-line large dropdown-toggle" type="button" id="tx-input-decoding-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="secBox-list__item-label">
+                <%= gettext "Raw Input" %>
+              </div>
+              <div class="secBox-list__item-txt">
+                <!-- Dropdown -->
+                <div class="dropdown">
+                  <button class="btn-dropdown-line large dropdown-toggle" type="button" id="tx-input-decoding-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <%= gettext("Hex (Default)") %>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="transaction-input-decoding-button">
+                    <a href class="dropdown-item large tx-input-dropdown" data-target=".tx-raw-input" data-target-to-hide=".tx-utf8-input" id="tx-dropdown-raw">
                       <%= gettext("Hex (Default)") %>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="transaction-input-decoding-button">
-                      <a href class="dropdown-item large tx-input-dropdown" data-target=".tx-raw-input" data-target-to-hide=".tx-utf8-input" id="tx-dropdown-raw">
-                        <%= gettext("Hex (Default)") %>
-                      </a>
-                      <a href class="dropdown-item large tx-input-dropdown" data-target=".tx-utf8-input" data-target-to-hide=".tx-raw-input" id="tx-dropdown-utf8">
-                        <%= gettext("UTF-8") %>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="btn-copy-tx-raw-input-container">
-                    <!-- Copy Hex input -->
-                    <%= render BlockScoutWeb.CommonComponentsView, "_btn_copy.html",
-                        id: "tx-raw-input",
-                        additional_classes: ["btn-copy-icon-small", "btn-copy-icon-no-borders", "btn-copy-icon-ml-0", "btn-copy-tx-raw-input", "tx-raw-input"],
-                        clipboard_text: @transaction.input,
-                        aria_label: gettext("Copy Value"),
-                        title: gettext("Copy Txn Hex Input") %>
-                    <!-- Copy UTF-8 input  -->
-                    <%= render BlockScoutWeb.CommonComponentsView, "_btn_copy.html",
-                        additional_classes: ["btn-copy-icon-small", "btn-copy-icon-no-borders", "btn-copy-icon-ml-0", "btn-copy-tx-raw-input", "tx-utf8-input"],
-                        clipboard_text: @transaction.input.bytes,
-                        aria_label: gettext("Copy Value"),
-                        title: gettext("Copy Txn UTF-8 Input"),
-                        style: "display: none;" %>
+                    </a>
+                    <a href class="dropdown-item large tx-input-dropdown" data-target=".tx-utf8-input" data-target-to-hide=".tx-raw-input" id="tx-dropdown-utf8">
+                      <%= gettext("UTF-8") %>
+                    </a>
                   </div>
                 </div>
-                <!-- Textarea -->
-                <div class="tx-raw-input">
-                  <div class="tile tile-muted">
-                    <pre class="pre-scrollable pre-scrollable-shorty pre-wrap mb-0"><code><%= @transaction.input %></code></pre>
-                  </div>
+                <div class="btn-copy-tx-raw-input-container">
+                  <!-- Copy Hex input -->
+                  <%= render BlockScoutWeb.CommonComponentsView, "_btn_copy.html",
+                      id: "tx-raw-input",
+                      additional_classes: ["btn-copy-icon-small", "btn-copy-icon-no-borders", "btn-copy-icon-ml-0", "btn-copy-tx-raw-input", "tx-raw-input"],
+                      clipboard_text: @transaction.input,
+                      aria_label: gettext("Copy Value"),
+                      title: gettext("Copy Txn Hex Input") %>
+                  <!-- Copy UTF-8 input  -->
+                  <%= render BlockScoutWeb.CommonComponentsView, "_btn_copy.html",
+                      additional_classes: ["btn-copy-icon-small", "btn-copy-icon-no-borders", "btn-copy-icon-ml-0", "btn-copy-tx-raw-input", "tx-utf8-input"],
+                      clipboard_text: @transaction.input.bytes,
+                      aria_label: gettext("Copy Value"),
+                      title: gettext("Copy Txn UTF-8 Input"),
+                      style: "display: none;" %>
                 </div>
-                <!-- Textfield -->
-                <div class="tx-utf8-input" style="display: none;">
-                  <div class="tile tile-muted">
-                    <pre class="pre-scrollable pre-scrollable-shorty pre-wrap mb-0"><code><%= @transaction.input.bytes %></code></pre>
-                  </div>
+              </div>
+              <!-- Textarea -->
+              <div class="tx-raw-input">
+                <div class="tile tile-muted">
+                  <pre class="pre-scrollable pre-scrollable-shorty pre-wrap mb-0"><code><%= @transaction.input %></code></pre>
                 </div>
-              </dd>
-                    </div>
+              </div>
+              <!-- Textfield -->
+              <div class="tx-utf8-input" style="display: none;">
+                <div class="tile tile-muted">
+                  <pre class="pre-scrollable pre-scrollable-shorty pre-wrap mb-0"><code><%= @transaction.input.bytes %></code></pre>
                 </div>
+              </div>
+              </div>
+          </div>
           <% end %>
         </div>
+      </div>
+    </div>
   </div>
+
   <%= render BlockScoutWeb.Advertisement.BannersAdView, "_banner_728.html", conn: @conn %>
 
   <%= unless skip_decoding?(@transaction) do %>
@@ -387,4 +492,4 @@
     </div>
   <% end %>
   <script defer data-cfasync="false" src="<%= static_path(@conn, "/js/transaction.js") %>"></script>
-</div>
+</section>
