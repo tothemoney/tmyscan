@@ -492,7 +492,8 @@
       </div>
     </div>
   <% end %>
-  <script defer data-cfasync="false" src="<%= static_path(@conn, "/js/transaction.js") %>"></script>
+  
   </div>
+  <script defer data-cfasync="false" src="<%= static_path(@conn, "/js/transaction.js") %>"></script>
   
 </section>

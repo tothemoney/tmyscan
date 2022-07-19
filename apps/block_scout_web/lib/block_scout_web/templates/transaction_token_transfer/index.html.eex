@@ -1,6 +1,6 @@
 <section class="container clear-container">
   <div class="d-flex flex-column">
-<%= render BlockScoutWeb.TransactionView, "overview.html", assigns %>
+  <%= render BlockScoutWeb.TransactionView, "overview.html", assigns %>
 
   <div class="card card-chain-blocks-fix">
     <%= render BlockScoutWeb.TransactionView, "_tabs.html", assigns %>

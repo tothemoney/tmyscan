@@ -1,5 +1,6 @@
 <section class="container clear-container">
-  <%= render BlockScoutWeb.TransactionView, "overview.html", assigns %>
+  <div class="d-flex flex-column">
+<%= render BlockScoutWeb.TransactionView, "overview.html", assigns %>
 
   <div class="card card-chain-blocks-fix">
     <%= render BlockScoutWeb.TransactionView, "_tabs.html", assigns %>
@@ -28,5 +29,6 @@
         <%= render BlockScoutWeb.CommonComponentsView, "_pagination_container.html", position: "bottom", cur_page_number: "1", show_pagination_limit: true, data_next_page_button: true, data_prev_page_button: true %>
 
     </div>
+  </div>
   </div>
 </section>
