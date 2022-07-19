@@ -21,8 +21,20 @@
           </div>
         </div>
 
-        <div data-items>
-          <%= render BlockScoutWeb.CommonComponentsView, "_tile-loader.html" %>
+        <div class="tableEl-wrapper tableEl-wrapper-pdSm tableEl-shadows">
+          <div class="tableEl-pre-heading d-flex align-items-center">
+            <div class="tableEl-pre-heading__title">></div>
+          </div>
+          <div class="tableEl tableEl-header-shown-responsive tableEl-Beetween tableEl-row-between">
+            <div class="tableEl-header">
+              <div class="tableEl-header-col onlydesktop">TYPE</div>
+              <div class="tableEl-header-col">SENDER/RECEIVER</div>
+              <div class="tableEl-header-col">AMOUNT</div>
+            </div>
+            <div class="tableEl-row-wrapper" data-items>
+              <%= render BlockScoutWeb.CommonComponentsView, "_tile-loader.html" %>
+            </div>
+          </div>
         </div>
 
         <%= render BlockScoutWeb.CommonComponentsView, "_pagination_container.html", position: "bottom", cur_page_number: "1", show_pagination_limit: true, data_next_page_button: true, data_prev_page_button: true %>

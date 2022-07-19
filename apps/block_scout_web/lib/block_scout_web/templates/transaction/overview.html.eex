@@ -432,7 +432,9 @@
                 <%= gettext "Raw Input" %>
               </div>
               <div class="secBox-list__item-txt">
-                <div class="f-flex">
+                <div class="d-flex flex-column">
+                <div class="d-flex flex-row justify-content-between mb-20p">
+
 <!-- Dropdown -->
                 <div class="dropdown">
                   <button class="btn-dropdown-line large dropdown-toggle" type="button" id="tx-input-decoding-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -462,6 +464,7 @@
                       aria_label: gettext("Copy Value"),
                       title: gettext("Copy Txn UTF-8 Input"),
                       style: "display: none;" %>
+                </div>
                 </div>
                 <!-- Textarea -->
               <div class="tx-raw-input">
