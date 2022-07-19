@@ -432,7 +432,8 @@
                 <%= gettext "Raw Input" %>
               </div>
               <div class="secBox-list__item-txt">
-                <!-- Dropdown -->
+                <div class="f-flex">
+<!-- Dropdown -->
                 <div class="dropdown">
                   <button class="btn-dropdown-line large dropdown-toggle" type="button" id="tx-input-decoding-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <%= gettext("Hex (Default)") %>
@@ -464,7 +465,7 @@
                 </div>
                 <!-- Textarea -->
               <div class="tx-raw-input">
-                <div class="tile tile-muted">
+                <div class="tile tile-muted" style="display: grid;">
                   <pre class="pre-scrollable pre-scrollable-shorty pre-wrap mb-0"><code><%= @transaction.input %></code></pre>
                 </div>
               </div>
@@ -474,6 +475,7 @@
                   <pre class="pre-scrollable pre-scrollable-shorty pre-wrap mb-0"><code><%= @transaction.input.bytes %></code></pre>
                 </div>
               </div>
+                </div>
               </div>
           </div>
           <% end %>
