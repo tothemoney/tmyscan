@@ -818,5 +818,8 @@ input:not([type="submit"]) {
   padding-top: 15px !important;
 }
 
+.p-r {
+  position: relative;
+}
 
 @import "_responsive";
