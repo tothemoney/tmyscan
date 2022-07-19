@@ -1,0 +1,44 @@
+<div class="tableEl-row fade-in" data-test="token-transfer" data-identifier-hash="<%= @token_transfer.transaction_hash %>-<%= @token_transfer.log_index %>">
+  <div class="tableEl-row-cell onlydesktop" data-cell-header="Type">
+    <span><%= render(BlockScoutWeb.CommonComponentsView, "_token_transfer_type_display_name.html", type: Chain.get_token_transfer_type(@token_transfer)) %></span>
+  </div>
+  <div class="tableEl-row-cell purpleCol" data-cell-header="Hash">
+    <span><%= render BlockScoutWeb.TransactionView, "_link.html", transaction_hash: @token_transfer.transaction_hash %></span>
+  </div>
+  <div class="tableEl-row-cell" data-cell-header="Transfer">
+    <div class="d-flex flex-column">
+        <%= link to: address_token_transfers_path(@conn, :index, Address.checksum(@token_transfer.from_address), Address.checksum(@token.contract_address_hash)), "data-test": "address_hash_link" do %>
+            <%= render(
+                  BlockScoutWeb.AddressView,
+                  "_responsive_hash.html",
+                  address: @token_transfer.from_address,
+                  contract: BlockScoutWeb.AddressView.contract?(@token_transfer.from_address),
+                  use_custom_tooltip: false
+                ) %>
+        <% end %>
+        &rarr;
+        <%= link to: address_token_transfers_path(@conn, :index, Address.checksum(@token_transfer.to_address), Address.checksum(@token.contract_address_hash)), "data-test": "address_hash_link" do %>
+            <%= render(
+                  BlockScoutWeb.AddressView,
+                  "_responsive_hash.html",
+                  address: @token_transfer.to_address,
+                  contract: BlockScoutWeb.AddressView.contract?(@token_transfer.to_address),
+                  use_custom_tooltip: false
+                ) %>
+        <% end %>
+  </div>
+  <div class="tableEl-row-cell" data-cell-header="Total">
+    <span><%= render BlockScoutWeb.TransactionView, "_total_transfers.html", Map.put(assigns, :transfer, @token_transfer) %></span>
+  </div>
+  <div class="tableEl-row-cell purpleCol onlydesktop" data-cell-header="№ Block">
+    <span class="mr-2 mr-md-0 order-1">
+        <%= link(
+          gettext("Block #%{number}", number: @token_transfer.block_number),
+          to: block_path(BlockScoutWeb.Endpoint, :show, @token_transfer.block_number)
+        ) %>
+      </span>
+  </div>
+  <div class="tableEl-row-cell onlydesktop" data-cell-header="Age">
+    <span class="mr-2 mr-md-0 order-2" data-from-now="<%= @token_transfer.transaction.block && @token_transfer.transaction.block.timestamp %>"></span>
+  </div>
+</div>
