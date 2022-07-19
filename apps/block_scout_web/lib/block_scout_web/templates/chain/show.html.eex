@@ -210,11 +210,15 @@
             <a href="#" class="alert-link"><span data-selector="channel-batching-count"></span> <%= gettext "More transactions have come in" %></a>
           </div>
         </div>
-
+            <button data-selector="error-message" class="alert alert-danger col-12 text-left" style="display: none;">
+            <span class="alert-link">
+              <%= gettext "Something went wrong, click to retry." %>
+            </span>
+          </button>
         <div class="tableEl-pre-heading d-flex align-items-center">
           <div class="tableEl-pre-heading__title"><%= gettext "Transactions" %></div>
         </div>
-
+        
         <div class="tableEl tableEl-header-shown-responsive tableEl-Beetween tableEl-row-between">
           <div class="tableEl-header">
             <div class="tableEl-header-col onlydesktop">Type</div>
@@ -227,11 +231,7 @@
             <div class="tableEl-header-col onlydesktop">Age</div>
           </div>
 
-          <button data-selector="error-message" class="alert alert-danger col-12 text-left" style="display: none;">
-            <span class="alert-link">
-              <%= gettext "Something went wrong, click to retry." %>
-            </span>
-          </button>
+          
           <div class="tableEl-row-wrapper" data-selector="transactions-list" data-transactions-path="<%= @transactions_path %>">
             <div hidden data-selector="loading-message">
               <%= render BlockScoutWeb.CommonComponentsView, "_tile-loader.html" %>
