@@ -61,7 +61,7 @@
 
         <div class="tableEl-wrapper tableEl-wrapper-pdSm tableEl-shadows">
           <div class="tableEl-pre-heading d-flex align-items-center">
-            <div class="tableEl-pre-heading__title"Ю</div>
+            <div class="tableEl-pre-heading__title"></div>
           </div>
           <div class="tableEl tableEl-header-shown-responsive tableEl-Beetween tableEl-row-between">
             <div class="tableEl-header">
