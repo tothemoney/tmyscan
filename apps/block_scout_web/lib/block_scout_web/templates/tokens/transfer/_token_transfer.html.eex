@@ -1,5 +1,5 @@
 <div class="tableEl-row fade-in" data-test="token-transfer" data-identifier-hash="<%= @token_transfer.transaction_hash %>-<%= @token_transfer.log_index %>">
-  <div class="tableEl-row-cell onlydesktop" data-cell-header="Types">
+  <div class="tableEl-row-cell onlydesktop" data-cell-header="Type">
     <span><%= render(BlockScoutWeb.CommonComponentsView, "_token_transfer_type_display_name.html", type: Chain.get_token_transfer_type(@token_transfer)) %></span>
   </div>
   <div class="tableEl-row-cell purpleCol" data-cell-header="Hash">
