@@ -1,35 +1,8 @@
 <div class="header-section">
-    <div class="header-section_top-area d-lg-flex justify-content-between align-items-center">
-        <div class="top_links">
-            <a href="#" class="activeTopNav">WhitePaper</a>
-            <a href="#">BlackPaper</a>
-            <a href="#">SilverPaper</a>
-            <a href="#">IndigoPaper</a>
-            <a href="#">Amber</a>
-        </div>
-
-        <div class="top_marketInfo-toolbar d-flex align-items-center">
-            <div class="top_marketInfo_item mr19">
-                    <%= System.get_env("COIN_NAME") || System.get_env("COIN") %> <%= gettext "Price" %>
-                    <span >0</span>
-                </div>
-            <div class="top_marketInfo_item mr57">
-                    <%= gettext "Market Cap" %>: 
-                    <span>0</span>
-                </div>
-            <div class="dropdown-element dropdown-element-lang">
-                <a href="#">in English</a>
-                <ul>
-                    <li><a href="#">in English</a></li>
-                    <li><a href="#">in Russian</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
     <div class="header-section_top-navbar d-flex justify-content-between align-items-center">
         <%= link to: webapp_url(@conn), class: "walletLogoEl", "data-test": "header_logo" do %>
             <img src="/images/wallet/wallet-logo.svg" alt="">
-            /:Blocks
+            /:TMY Scan
         <% end %>
         <nav class="MainNavbar">
             <ul class="d-flex justify-content-between">
@@ -40,6 +13,16 @@
                             <%= gettext("Компания") %>
                         </a>
                         <ul>
+                            <li>
+                                <a href="https://tmychain.org">
+                                    <%= gettext("Главная") %>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://wallet.tmychain.org">
+                                    <%= gettext("Кошелек") %>
+                                </a>
+                            </li>
                             <li>
                                 <a href="https://tmychain.org/docs">
                                     <%= gettext("Документы") %>
@@ -109,7 +92,7 @@
                             </li>
                             <li>
                                 <%= link(
-                                    gettext("Ether"),
+                                    gettext("TMY"),
                                     class: "",
                                     to: address_path(@conn, :index)
                                 ) %>

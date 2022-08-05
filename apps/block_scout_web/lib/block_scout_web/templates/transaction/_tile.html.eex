@@ -41,8 +41,14 @@
     data-cell-header="AMOUNT"
   >
     <div class="d-flex flex-column">
-      <span><%= value(@transaction, include_label: false) %> <%= gettext "Ether" %></span>
-      <span><%= formatted_fee(@transaction, denomination: :ether, include_label: false) %> <%= gettext "TX Fee" %></span>
+      <span><%= value(@transaction, include_label: false) %> <%= gettext "TMY" %></span>
+      <span><%= formatted_fee(@transaction, denomination: :ether, include_label: true) %> <%= gettext "TX Fee" %></span>
+      <span>
+      <%= formatted_fee(@transaction, denomination: :ether) %>
+      <%= if !empty_exchange_rate?(@exchange_rate) do %>
+        (<span data-wei-value=<%= fee(@transaction) %> data-usd-exchange-rate=<%= @exchange_rate.usd_value %>></span>)
+      <% end %>
+      </span>
     </div>
   </div>
   <div

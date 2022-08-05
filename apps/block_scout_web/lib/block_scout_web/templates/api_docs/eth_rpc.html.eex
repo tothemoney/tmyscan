@@ -1,5 +1,5 @@
-<section class="container">
-  <div class="card">
+<section class="containe clear-containerr">
+  <div class="card card-chain-blocks-fix">
     <div class="card-body">
       <h1 class="card-title margin-bottom-sm"><%= gettext("ETH RPC API Documentation") %></h2>
       <p class="api-text-monospace" data-endpoint-url="<%= eth_rpc_api_url() %>">[ <%= gettext "Base URL:" %> <%= eth_rpc_api_url()%> ]</p>
@@ -16,7 +16,7 @@
       </p>
     </div>
   </div>
-  <div class="card">
+  <div class="card card-chain-blocks-fix">
     <%= for {method, info} <- Map.to_list(@documentation) do %>
       <%= render "_eth_rpc_item.html", action: method, info: info %>
     <% end %>

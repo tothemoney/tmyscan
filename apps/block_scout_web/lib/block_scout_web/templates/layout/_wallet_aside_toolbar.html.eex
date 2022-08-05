@@ -16,7 +16,7 @@
                     </svg></span>
                 <span class="asideToolbar__item-text">Wallet</span>
             </a>
-            <a href="https://wallet.tmychain.org#tokens" class="asideToolbar__item" role="button">
+            <a href="https://tmyscan.com/tokens" class="asideToolbar__item" role="button">
                 <span class="asideToolbar__item-icon"><svg width="17" height="17" viewBox="0 0 17 17" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -29,7 +29,7 @@
                     </svg> </span>
                 <span class="asideToolbar__item-text">Tokens</span>
             </a>
-            <a href="https://tmyscan.com" class="asideToolbar__item" role="button">
+            <a href="https://tmyscan.com/txs" class="asideToolbar__item" role="button">
                 <span class="asideToolbar__item-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -52,24 +52,6 @@
                             stroke="#B2B2B2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg> </span>
                 <span class="asideToolbar__item-text">Transactions</span>
-            </a>
-            <a href="#" class="asideToolbar__item" role="button">
-                <span class="asideToolbar__item-icon"><svg width="17" height="17" viewBox="0 0 17 17" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M15.4243 4.46191H9.65505C9.33642 4.46191 9.07812 4.72021 9.07812 5.03884V9.0773C9.07812 9.39592 9.33642 9.65422 9.65505 9.65422H15.4243C15.7429 9.65422 16.0012 9.39592 16.0012 9.0773V5.03884C16.0012 4.72021 15.7429 4.46191 15.4243 4.46191Z"
-                            stroke="#6D00F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M10.2324 4.46154V3.30769C10.2324 2.69565 10.4756 2.10868 10.9083 1.67591C11.3411 1.24313 11.9281 1 12.5401 1C13.1522 1 13.7391 1.24313 14.1719 1.67591C14.6047 2.10868 14.8478 2.69565 14.8478 3.30769V4.46154"
-                            stroke="#6D00F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M1 10.2305H4.46154C4.84035 10.2305 5.21546 10.3051 5.56543 10.45C5.91541 10.595 6.23341 10.8075 6.50127 11.0754C6.76913 11.3432 6.98161 11.6612 7.12658 12.0112C7.27154 12.3612 7.34615 12.7363 7.34615 13.1151V13.1151"
-                            stroke="#6D00F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M3.88462 13.1152H9.65385C10.2659 13.1152 10.8529 13.3584 11.2856 13.7911C11.7184 14.2239 11.9615 14.8109 11.9615 15.4229C11.9615 15.5759 11.9008 15.7227 11.7926 15.8309C11.6844 15.9391 11.5376 15.9998 11.3846 15.9998H1"
-                            stroke="#6D00F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg> </span>
-                <span class="asideToolbar__item-text">Dex</span>
             </a>
         </div>
     </div>
