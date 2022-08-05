@@ -5,7 +5,7 @@
       <p class="api-text-monospace" data-endpoint-url="<%= api_url() %>">[ <%= gettext "Base URL:" %> <%= api_url()%> ]</p>
       <p class="card-subtitle margin-bottom-0"><%= gettext "This API is provided for developers transitioning their applications from Etherscan to BlockScout. It supports GET and POST requests." %></p>
     </div>
-    <div class="api-anchors-list">
+    <div class="api-anchors-list api-anchors-list-fix-bg">
       <%= for module <- @documentation do %>
         <%= render "_module_item.html", module: module %>
       <% end %>

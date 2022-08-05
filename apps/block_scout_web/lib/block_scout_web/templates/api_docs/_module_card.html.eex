@@ -1,4 +1,4 @@
-<div class="card" id="<%= @module.name %>">
+<div class="card card-chain-blocks-fix" id="<%= @module.name %>">
   <div class="card-header">
     <h2 class="card-title margin-bottom-0">
       <%= "#{String.capitalize(@module.name)}" %>
