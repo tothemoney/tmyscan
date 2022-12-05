@@ -846,17 +846,17 @@ msgstr ""
 #: lib/block_scout_web/views/transaction_view.ex:214
 #, elixir-autogen, elixir-format
 msgid "ERC-1155 "
-msgstr ""
+msgstr "TTS-115 "
 
 #: lib/block_scout_web/views/transaction_view.ex:212
 #, elixir-autogen, elixir-format
 msgid "ERC-20 "
-msgstr ""
+msgstr "TTS-20 "
 
 #: lib/block_scout_web/views/transaction_view.ex:213
 #, elixir-autogen, elixir-format
 msgid "ERC-721 "
-msgstr ""
+msgstr "TTS-721 "
 
 #: lib/block_scout_web/templates/address_token/overview.html.eex:1
 #: lib/block_scout_web/templates/smart_contract/_functions.html.eex:104
@@ -864,12 +864,12 @@ msgstr ""
 #: lib/block_scout_web/templates/smart_contract/_functions.html.eex:146
 #, elixir-autogen, elixir-format
 msgid "ETH"
-msgstr ""
+msgstr "TMY"
 
 #: lib/block_scout_web/templates/api_docs/eth_rpc.html.eex:4
 #, elixir-autogen, elixir-format
 msgid "ETH RPC API Documentation"
-msgstr ""
+msgstr "TMY RPC API Documentation"
 
 #: lib/block_scout_web/templates/address_contract/index.html.eex:76
 #: lib/block_scout_web/templates/address_contract_verification_via_flattened_code/new.html.eex:26
@@ -957,7 +957,7 @@ msgstr ""
 #: lib/block_scout_web/views/wei_helpers.ex:78
 #, elixir-autogen, elixir-format
 msgid "Ether"
-msgstr ""
+msgstr "TMY"
 
 #: lib/block_scout_web/templates/api_docs/_action_tile.html.eex:211
 #: lib/block_scout_web/templates/api_docs/_eth_rpc_item.html.eex:164
@@ -1274,7 +1274,7 @@ msgstr ""
 #: lib/block_scout_web/templates/transaction/overview.html.eex:297
 #, elixir-autogen, elixir-format
 msgid "List of ERC-1155 tokens created in the transaction."
-msgstr ""
+msgstr "List of TTS-1155 tokens created in the transaction."
 
 #: lib/block_scout_web/templates/transaction/overview.html.eex:281
 #, elixir-autogen, elixir-format
@@ -1801,7 +1801,7 @@ msgstr ""
 #: lib/block_scout_web/templates/address_token/overview.html.eex:59
 #, elixir-autogen, elixir-format
 msgid "Shows the tokens held in the address (includes ERC-20, ERC-721 and ERC-1155)."
-msgstr ""
+msgstr "Shows the tokens held in the address (includes TTS-20, TTS-721 and TTS-1155)."
 
 #: lib/block_scout_web/templates/address_token/overview.html.eex:66
 #, elixir-autogen, elixir-format
@@ -1931,7 +1931,7 @@ msgstr ""
 #: lib/block_scout_web/templates/smart_contract/_functions.html.eex:41
 #, elixir-autogen, elixir-format
 msgid "The fallback function is executed on a call to the contract if none of the other functions match the given function signature, or if no data was supplied at all and there is no receive Ether function. The fallback function always receives data, but in order to also receive Ether it must be marked payable."
-msgstr ""
+msgstr "The fallback function is executed on a call to the contract if none of the other functions match the given function signature, or if no data was supplied at all and there is no receive TMY function. The fallback function always receives data, but in order to also receive TMY it must be marked payable."
 
 #: lib/block_scout_web/templates/block/overview.html.eex:138
 #, elixir-autogen, elixir-format
@@ -1956,7 +1956,7 @@ msgstr ""
 #: lib/block_scout_web/templates/smart_contract/_functions.html.eex:43
 #, elixir-autogen, elixir-format
 msgid "The receive function is executed on a call to the contract with empty calldata. This is the function that is executed on plain Ether transfers (e.g. via .send() or .transfer()). If no such function exists, but a payable fallback function exists, the fallback function will be called on a plain Ether transfer. If neither a receive Ether nor a payable fallback function is present, the contract cannot receive Ether through regular transactions and throws an exception."
-msgstr ""
+msgstr "The receive function is executed on a call to the contract with empty calldata. This is the function that is executed on plain TMY transfers (e.g. via .send() or .transfer()). If no such function exists, but a payable fallback function exists, the fallback function will be called on a plain TMY transfer. If neither a receive TMY nor a payable fallback function is present, the contract cannot receive TMY through regular transactions and throws an exception."
 
 #: lib/block_scout_web/templates/transaction/overview.html.eex:129
 #, elixir-autogen, elixir-format
@@ -2716,7 +2716,7 @@ msgstr ""
 #: lib/block_scout_web/templates/address/overview.html.eex:167
 #, elixir-autogen, elixir-format
 msgid "doesn't include ERC20, ERC721, ERC1155 tokens)."
-msgstr ""
+msgstr "doesn't include TTS20, TTS721, TTS1155 tokens)."
 
 #: lib/block_scout_web/templates/common_components/_rap_pagination_container.html.eex:13
 #, elixir-autogen, elixir-format
