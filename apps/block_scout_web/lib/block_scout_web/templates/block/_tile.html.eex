@@ -41,7 +41,7 @@
     data-cell-header="Size"
   >
     <%= if @block.size do %>
-      <span> <%= Cldr.Unit.new(:byte, @block.size) |> cldr_unit_to_string!() %> </span>
+      <span> <%= ngettext("%{count}", "%{count}", Enum.count(@block.size)) %> </span>
     <% else %>
       <span>-</span>
     <% end %>
